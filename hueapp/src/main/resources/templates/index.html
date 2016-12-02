@@ -14,16 +14,22 @@
 <p>Today is: <span th:text="${#dates.createNow()}">13 February 2016</span>.</p>
 	<div class="lightlist" th:unless="${#lists.isEmpty(allLights)}">
 		<h2 th:text="#{title.list}">Light List</h2>
-		<table>
+		<table class="mainTable">
 			<thead>
 				<tr>
 					<th th:text="#{lightlist.name}">Name</th>
+					<th th:text="#{lightlist.on}">On</th>
+					<th th:text="#{lightlist.reachable}">Reachable</th>
+					<th th:text="#{lightlist.effect}">Effect</th>
 					<th th:text="#{lightlist.type}">Type</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="light : ${lights}">
 					<td th:text="${light.name}">name</td>
+					<td th:text="${light.state.on}">on</td>
+					<td th:text="${light.state.reachable}">on</td>
+					<td th:text="${light.state.effect}">on</td>
 					<td th:text="${light.type}">type</td>
 				</tr>
 			</tbody>
