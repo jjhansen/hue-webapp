@@ -1,6 +1,7 @@
 package com.electromagneticsoftware.business.entities;
 
 public class Bridge {
+	
 	private String ipAddress;
 	private String username;
 	
