@@ -1,0 +1,579 @@
+
+/* -------------------------------------------- */
+/*   HueApp StyleSheet                          */
+/*                                              */
+/*   Copyright 2016. Electromagnetic Software   */
+/* -------------------------------------------- */
+
+
+{ 
+padding: 0; 
+margin: 0; 
+border: 0; 
+}
+
+body{
+	margin: 0;
+	padding: inherit 0 inherit 0;
+	background-color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+a:link, a:visited, a:hover {
+	text-decoration: underline;
+}
+
+#header {
+	margin: 0px;
+	height: 102px;
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: 100% 0%;
+}
+
+.footer {
+	/* position: absolute; */
+	width: 100%;
+	margin: 5px 0px 5px 0px;
+	font-size: 0.6em;
+	color: #000000;
+	text-align:center;
+	vertical-align: bottom;
+	clear: both;
+	border-width: 2px;
+	border-style: solid none solid none;
+	/* background-color: #CCFFFF;  DEBUG USE */
+}
+
+.footer ul { 
+	margin-left: 0;
+	margin-bottom: 5px;
+	padding-left: 0;
+	display:inline;
+} 
+
+.footer ul li {
+	margin-left: 0;
+	padding: 4px 9px 4px 8px;
+	list-style: none;
+	display: inline;
+	border-right: 1px dotted #000000;
+}
+.footer ul li.last {
+	border-right: 0px;
+}
+
+.centerFrame {
+	margin: 0;
+	width: 100%;
+	table-layout: fixed;
+	border-style: none;
+	/* border: 1px solid red;   DEBUG USE */
+}
+
+.centerFrame td {
+	vertical-align: top;
+}
+
+#breadCrumb {
+	padding: 0; 
+	border: 0;
+	margin: 0;
+	min-height: 25px;
+	height: auto !important;	/* min-height hack for ie6 */
+	height: 25px;				/* min-height hack for ie6 */
+	font-size: 0.75em; 
+	color: #000000; /* color of text that's not a link */ 
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+#breadCrumb ul {
+	margin: 0;
+	padding: 0;
+	display:inline;
+}
+
+#breadCrumb ul li { 
+	padding: 0.5em 0 0.5em 0; 
+	float: left;
+	display: inline;
+	margin-left: 0em;
+	margin-right: 0.5em; 
+}
+
+#breadCrumb ul a { 
+	color: #000000; /* breadcrumb links */ 
+	font-weight: bold;
+	background: url(../images/breadcrumb.gif) center right no-repeat;
+	padding-left: 0em; 
+	padding-right: 1.5em; /* space for the background image*/ 
+	text-decoration: none; 
+} 
+
+#navigation {
+	vertical-align:middle;
+	font-size:0.75em;
+	font-weight:bold;
+}
+	
+#navigation ul {
+	margin-left: 0;
+	padding-left: 0;
+	display:inline;
+} 
+
+#navigation ul li {
+	margin-left: 0;
+	padding: 4px 9px 4px 8px;
+	list-style: none;
+	display: inline;
+}
+
+#navigation ul li a {
+	padding-right: 1.5em;
+}
+
+#navigation a:link,
+#navigation a:visited,
+#navigation a:hover {
+	text-decoration:none;
+}
+
+.padded_container {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+div.header_row {
+	clear: both;
+	padding: 0px;
+}
+	
+div.top_row {
+	clear: both;
+	padding: 0px;
+}
+	
+div.top_row div.logo {
+	float: left;
+	width: 49%;
+}
+
+div.top_row div.logo img {
+	margin: 10px auto 0px 5px;
+	border: 0px none #000000;
+}
+	
+div.top_row div.top_nav {
+	margin: 0px;
+	float: right;
+	width: 49%;
+	font-size: 0.75em;
+	text-align: right;
+	vertical-align: bottom;
+}
+
+div.top_row div.top_nav div.welcomeUser {
+	margin-top: 35px;
+	padding: 0 10px 5px 0;
+	font-weight: bold;
+}
+	
+div.top_row div.top_nav ul {
+	margin: 0 0 1px 0;
+	padding-left: 0;
+	text-align: right;
+} 
+
+div.top_row div.top_nav ul li {
+	margin-left: 0;
+	padding: 0 9px 0 8px;
+	list-style: none;
+	display: inline;
+	border-right: 1px solid #000000;
+}
+
+div.top_row div.top_nav ul li.last {
+	border-right: 0px;
+}
+
+div.top_row div.top_nav a:link,
+div.top_row div.top_nav a:visited {
+	text-decoration:none;
+}
+
+div.header_row div.nav {
+	float: left;
+	width: 100%;
+	border-width: 2px 0px 2px 0px;
+	border-style: solid;
+	padding: 5px 0 5px 0px;
+	min-height: 15px;
+}
+
+.leftNavColumn {
+	width: 180px;
+	border-style: none;
+	/* border: 1px solid red;  DEBUG USE */
+}
+
+.contentColumn {
+	border-style: none;
+	/* border: 1px solid red;  DEBUG USE */
+	/* background-color: #CCCCFF;  DEBUG USE */
+}
+
+#centerContent {
+	min-height: 380px;
+	height: auto !important;	/* min-height hack for ie6 */
+	height: 380px;				/* min-height hack for ie6 */
+}
+
+#leftNavigation {
+	width: 180px;
+ 	min-height: 380px;
+	font-size: 0.75em;
+	font-weight: bold;
+	padding: 0em 0em 3em 0em;
+}
+
+#leftNavigation .nav_header {
+	font-size: 1.1em;
+	margin: 0;
+	padding: 1em 0em 1em 0.5em;
+}
+
+#leftNavigation ul {
+	margin: 0;
+	padding: 0em 0em 0em 0.5em;
+	border-style: none;
+} 
+
+#leftNavigation ul li {
+	margin: 0em 1em 0em 0em;
+	padding: 0;
+	list-style: none;
+}
+
+#leftNavigation a:link,
+#leftNavigation a:visited {
+	text-decoration:none;
+}
+
+#leftNavigation ul li a {
+	padding: 2px 2px 2px 3px;
+	display: block;
+	height: auto !important;	/* workaround for IE6 whitespace bug */
+	height: 1em;	/* workaround for IE6 whitespace bug */
+	border-left-width: 10px;
+	border-left-style: solid;
+	text-decoration: none;
+	text-align: left;
+	margin: 1px 0 1px 0;
+}
+
+#leftNavigation ul li a:hover {
+	border-left-width: 10px;
+	border-left-style: solid;
+	text-decoration:none;
+}
+
+.rightColumn {
+	text-align: right;
+}
+
+.leftColumn {
+	text-align: left;
+}
+
+.centerColumn {
+	text-align: center;
+}
+
+.paddedCenterColumn {
+	text-align: center;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+form {
+	margin:0;
+	padding:0;
+}
+
+.centered {
+	text-align: center;
+    margin: 0px auto;
+}
+
+table.fullWidthTable {
+	font-size: 0.75em;
+	width: 97%;
+	margin: 5px auto auto 0px;
+	padding: 0;
+}
+
+table.fullWidthTable td { 
+	border: 0px;
+}
+
+table.leftJustifiedTable {
+	font-size: 0.75em;
+	margin: 5px auto auto 0px;
+	padding: 0;
+}
+
+table.leftJustifiedTable td { 
+	border: 0px;
+}
+
+.listbox { 
+	background-color: #FFFFFF; 
+	color: #000000;
+	width: 200px;
+	height: 110px; 
+}
+
+.dropdownSelect { 
+	background-color: #FFFFFF; 
+	color: #000000;
+	height: auto; 
+}
+
+table.mainTable {
+	font-size: 0.75em; 
+	border-style: none;
+	border-collapse: collapse;
+	margin-top: 5px;
+	margin-left: 5px; 
+}
+
+table.mainTable td { 
+	border: 0px;
+	font-size: 10px;
+	text-align: center;
+}
+
+table.mainTable td.labelColumn {
+	border-width: 1px;
+	border-style: solid;
+	font-size: 11px;
+	text-align: left; 
+	background-color: transparent;
+	width: 150px;
+	vertical-align: top; 
+}
+
+table.mainTable td.messageColumn {
+	text-align: left;
+	font-size: 11px;
+}
+
+
+table.mainTable td.fieldColumn {
+	border-width: 1px;
+	border-style: solid;
+	padding-left: 4px; 
+	padding-right: 4px;
+	text-align: left; 
+	width: 200px;
+	max-width: 500px;
+}
+
+table.mainTable td.errorColumn {
+	border-style: none;
+	background-color: #FFFFFF;
+	color: #FF0000; 
+	padding-left: 4px;
+	padding-right: 4px;
+	text-align: left; 
+}
+
+.fieldColumn input.textbox, .fieldColumn textarea {
+	width: 98%;
+	font-family: inherit;
+	font-size: 11px; 
+	text-align: left;
+}
+
+.fieldColumn input.checkbox {
+	width: auto; 
+	font-size: 11px; 
+	background-color: transparent; 
+	text-align: left;
+}
+
+
+.fieldColumn input.calendar {
+	font-size: 11px; 
+	background-color: #FFFFFF; 
+	text-align: left;
+}
+
+
+.stringLeftColumn {
+	text-align: left; 
+	margin: 0px; 
+	padding: 0px;
+}
+
+.stringRightColumn {
+	text-align: right; 
+	margin: 0px; 
+	padding: 0px;
+}
+
+.numberColumn {
+	text-align: right; 
+	margin: 0px; 
+	padding-right: 5px;
+}
+
+.booleanColumn {
+	text-align: center; 
+	margin: 0px; 
+	padding: 0px;
+}
+
+.dateColumn, .datetimeColumn {
+	text-align: center; 
+	margin: 0px; 
+	padding: 0px;
+}
+
+.button, .bigButton { 
+	font-size: 11px;
+	text-align: center; 
+	margin-left: 12px; 
+	margin-top: 3px; 
+	margin-bottom: 2px;
+}
+
+.button { 
+	width: 75px;
+	max-width: 120px; 
+}
+
+.messageFatal, .messageError, .messageWarn, .messageInfo {
+	font-size: 1.0em;
+	margin: 0;
+	padding: 0;
+}
+	
+.messageFatal, .messageError {
+	color: red;
+}
+
+.messageWarn {
+	color: orange; 
+}
+
+.messageInfo {
+	color: green; 
+}
+
+.messageFatal {
+	font-weight: bold; 
+}
+
+.instruction, .helpText, .codeText {
+	font-size: 0.75em;
+	color: #000000;
+	margin: 0;
+}
+	
+.instruction {
+	background-color: #FFFFEA;
+	padding: 1px;
+	border: 1px solid #000000;
+}
+
+.helpText {
+	padding: 2px;
+}
+
+.codeText {
+	font-family: "Courier New"; 
+	padding: 2px;
+}
+
+/* general anchor colors */
+a:link, a:visited {
+	color: #333333;
+}
+
+input.roleButton {
+	color: #000000;
+	border-color: #000000;
+	background-color: #EEEEEE;
+}
+
+div.top_row div.top_nav ul li,
+div.top_row div.top_nav a:link
+{
+	color: #000000;	
+}
+
+a:hover,
+.footer a:hover,
+#navigation a:hover,
+#breadCrumb ul a:hover,
+input.roleButton:hover,
+div.top_row div.top_nav a:hover
+{
+	color: #0079C2;
+}
+
+.footer,
+div.header_row div.nav,
+#leftNavigation ul li a,
+#leftNavigation ul li a:hover,
+input.roleButton:hover
+{
+	border-color: #0079C2;
+}
+
+#leftNavigation ul li a:hover
+{
+	color: #FFFFFF;
+	background-color: #0079C2;
+}
+
+.button, .bigButton,
+#leftNavigation ul li a,
+div.header_row div.nav
+{
+	background-color: #D7E5F2;
+}
+	
+.tableHeader,
+table.mainTable,
+table.mainTable td.fieldColumn,
+.leftNavColumn
+{
+	background-color: #EEF6FB;
+}
+
+table.mainTable td.labelColumn,
+table.mainTable td.fieldColumn
+{
+	border-color: #EEF6FB;
+}
+
+.stringLeftColumn,
+.stringRightColumn,
+.numberColumn,
+.booleanColumn,
+.dateColumn,
+.datetimeColumn,
+table.mainTable td.labelColumn
+{
+	background-color: #F6FBFD; 
+}
+
+.captchaBorder
+{
+	border: 1px solid #0079C2;
+}
+

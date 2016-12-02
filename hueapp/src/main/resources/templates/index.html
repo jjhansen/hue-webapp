@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+ 
+    <title>Hue App</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/ems.css" th:href="@{/css/ems.css}" />
+</head>
+<body>
+<h1>Hello</h1>
+ 
+<h2>Welcome to the Hansen Hue App</h2>
+<p>Today is: <span th:text="${#dates.createNow()}">13 February 2016</span>.</p>
+	<div class="lightlist" th:unless="${#lists.isEmpty(allLights)}">
+		<h2 th:text="#{title.list}">Light List</h2>
+		<table>
+			<thead>
+				<tr>
+					<th th:text="#{lightlist.name}">Name</th>
+					<th th:text="#{lightlist.type}">Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="light : ${lights}">
+					<td th:text="${light.name}">name</td>
+					<td th:text="${light.type}">type</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
