@@ -46,7 +46,7 @@
             <h1 id="top">Hue Light Status</h1>
             <p>Status as reported by the Hue Bridge.</p>
 
-        <table class="mainTable">
+		<table class="mainTable">
 			<thead>
 				<tr>
 					<th th:text="#{lightlist.name}">Light</th>
@@ -62,57 +62,16 @@
 			<tbody>
 				<tr th:each="light : ${allLights}">
 					<td th:text="${light.name}">name</td>
-					<td th:utext="${light.state.on} ? #{on.true} : #{on.false}">on</td>
-					<td th:text="${light.state.reachable}">on</td>
-					<td th:text="${light.state.effect}">none</td>
+					<td th:utext="${light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-12.gif" alt="On"/></td>
+					<td th:utext="${light.state.reachable} ? #{reachable.true} : #{reachable.false}">false <img src="../static/images/icon-exclamation-12.gif" alt="Unreachable"/></td>
+					<td th:text="${light.state.effect}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
 					<td th:text="${light.type}">type</td>
 					<td th:text="${light.state.bri}">unk</td>
 					<td th:text="${light.state.hue}">unk</td>
 					<td th:text="${light.state.sat}">unk</td>
 				</tr>
-				<tr>
-					<td>xTable light</td>
-					<td>on <img src="../static/images/icon-lightbulb-12.gif" th:src="@{/images/icon-lightbulb-12.gif}" alt="On"/></td>
-					<td>false <img src="../static/images/icon-exclamation-12.gif" th:src="@{/images/icon-exclamation-12.gif}" alt="Unreachable"/></td>
-					<td>none</td>
-					<td>Extd color light</td>
-					<td>14</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>xCopper lamp</td>
-					<td>on <img src="../static/images/icon-lightbulb-12.gif" th:src="@{/images/icon-lightbulb-12.gif}" alt="On"/></td>
-					<td>true</td>
-					<td>Loop <img src="../static/images/icon-color-wheel-12.gif" th:src="@{/images/icon-color-wheel-12.gif}" alt="Color loop"/></td>
-					<td>Extd color light</td>
-					<td>14</td>
-					<td>47104</td>
-					<td>254</td>
-				</tr>
-				<tr>
-					<td>xB&#39;s Bloom 1</td>
-					<td>off</td>
-					<td>false <img src="../static/images/icon-exclamation-12.gif" th:src="@{/images/icon-exclamation-12.gif}" alt="Unreachable"/></td>
-					<td>none</td>
-					<td>Color light</td>
-					<td>14</td>
-					<td>47675</td>
-					<td>254</td>
-				</tr>
-				<tr>
-					<td>xB&#39;s bloom 2</td>
-					<td>off</td>
-					<td>false <img src="../static/images/icon-exclamation-12.gif" th:src="@{/images/icon-exclamation-12.gif}" alt="Unreachable"/></td>
-					<td>none</td>
-					<td>Color light</td>
-					<td>14</td>
-					<td>47675</td>
-					<td>254</td>
-				</tr>
 			</tbody>
 		</table>
-
 
           </article>
           </div><!-- end .content -->
