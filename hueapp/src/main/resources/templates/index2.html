@@ -62,7 +62,7 @@
 			<tbody>
 				<tr th:each="light : ${allLights}">
 					<td th:text="${light.name}">name</td>
-					<td th:text="${light.state.on} ? #{on.true} : #{on.false}">on</td>
+					<td th:utext="${light.state.on} ? #{on.true} : #{on.false}">on</td>
 					<td th:text="${light.state.reachable}">on</td>
 					<td th:text="${light.state.effect}">none</td>
 					<td th:text="${light.type}">type</td>
