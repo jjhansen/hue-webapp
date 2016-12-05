@@ -1,15 +1,14 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
- 
     <title>Hue App</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" media="all" href="../static/css/ems.css" th:href="@{/css/ems.css}" />
 </head>
 <body>
+
 	<h2>Welcome to the Hansen Hue App</h2>
-	<p>Today is: <span th:text="${#dates.createNow()}">13 February 2016</span>.</p>
+	<p id="today">Today is: <span th:text="${#dates.createNow()}">13 February 2016</span>.</p>
 	
 	<div>
 		<form action="#" th:action="@{/index}" th:object="${bridge}" method="post">
@@ -30,15 +29,21 @@
 					<th th:text="#{lightlist.reachable}">Reachable</th>
 					<th th:text="#{lightlist.effect}">Effect</th>
 					<th th:text="#{lightlist.type}">Type</th>
+					<th th:text="#{lightlist.bri}">Brightness</th>
+					<th th:text="#{lightlist.hue}">Hue</th>
+					<th th:text="#{lightlist.sat}">Saturation</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="light : ${lights}">
+				<tr th:each="light : ${allLights}">
 					<td th:text="${light.name}">name</td>
 					<td th:text="${light.state.on} ? #{on.true} : #{on.false}">on</td>
 					<td th:text="${light.state.reachable}">on</td>
-					<td th:text="${light.state.effect}">on</td>
+					<td th:text="${light.state.effect}">none</td>
 					<td th:text="${light.type}">type</td>
+					<td th:text="${light.state.bri}">unk</td>
+					<td th:text="${light.state.hue}">unk</td>
+					<td th:text="${light.state.sat}">unk</td>
 				</tr>
 			</tbody>
 		</table>

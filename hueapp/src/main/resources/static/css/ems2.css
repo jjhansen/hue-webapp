@@ -5,34 +5,60 @@
 /*   Copyright 2016. Electromagnetic Software   */
 /* -------------------------------------------- */
 
-
-{ 
-padding: 0; 
-margin: 0; 
-border: 0; 
-}
+/* color key:
+	white #ffffff
+	orange	#f26a21
+	off wht	#ebebeb
+	lt gray	#2a2929
+	dk gray	#191919
+*/
 
 body{
 	margin: 0;
 	padding: inherit 0 inherit 0;
-	background-color: #FFFFFF;
+	color: white;
+	background-color: #191919;
+	font-size: 12px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-
+h1 { font-size: 24px; }
+h2 { font-size: 20px; }
+h3 { font-size: 16px; }
 a:link, a:visited, a:hover {
 	text-decoration: underline;
 }
 /* -------------------------------------------- */
 /*   Heading section                            */
 /* -------------------------------------------- */
-header {
+header,
+footer {
 	margin: 0px;
-	height: 102px;
-	background-color: #FFFFFF;
-	background-repeat: no-repeat;
-	background-position: 100% 0%;
+	height: 68px;
+	vertical-align: top;
+	background-color: #2a2929;
+	border-bottom: 2px solid #f26a21;
 }
-
+img.logo {
+	padding: 2px 2px 0 2px;
+}
+div.date {
+	display: inline;
+	padding-left: 15%;
+	color: #f26a21;
+	font-size: smaller;
+}
+div.user-info {
+	float: right;
+}
+/* -------------------------------------------- */
+/*   Body content                               */
+/* -------------------------------------------- */
+div.container {
+	min-height: 320px;
+	padding: 1em;
+	color: #111111;
+	background-color: #ebebeb;
+}
 .centerFrame {
 	margin: 0;
 	width: 100%;
@@ -46,7 +72,7 @@ header {
 }
 #today {
 	color: #008;
-} 
+}
 
 #navigation {
 	vertical-align:middle;
@@ -499,15 +525,20 @@ table.mainTable td.labelColumn
 .messageWarn { color: orange; }
 .messageInfo { color: green; }
 .messageFatal { font-weight: bold; }
+
 /* -------------------------------------------- */
 /*   Footing section                            */
 /* -------------------------------------------- */
+footer {
+	border-bottom: none;
+	border-top: 2px solid #f26a21;
+}
 .footer {
-	color: #404040;
 	text-align: center;
 	vertical-align: bottom;
 	clear: both;
 	border-width: 2px;
+	color: #404040;
 	border-style: solid none solid none;
 	/* background-color: #CCFFFF;  DEBUG USE */
 }
@@ -518,6 +549,7 @@ table.mainTable td.labelColumn
 	padding-left: 0;
 	display:inline;
 } 
+
 .footer ul li {
 	margin-left: 0;
 	padding: 4px 9px 4px 8px;

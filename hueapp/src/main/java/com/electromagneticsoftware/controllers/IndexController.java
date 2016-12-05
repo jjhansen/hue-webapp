@@ -36,6 +36,12 @@ public class IndexController {
 		return new ModelAndView( "index", "lights", lights );
 	}
 	
+	@GetMapping("/index2")
+	public ModelAndView list2() {
+		Bridge bridge = bridgeRepository.find();
+		Iterable<Light> lights = lightRepository.findAll( bridge );
+		return new ModelAndView( "index2", "lights", lights );
+	}
     @ModelAttribute("allLights")
     public List<Light> populateLights() {
         return lightRepository.findAll( bridgeRepository.find() );

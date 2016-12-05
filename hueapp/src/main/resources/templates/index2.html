@@ -1,0 +1,88 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+  <title>Hansen Hue App 2</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../static/css/normalize.min.css" th:href="@{/css/normalize.min.css}" />
+  <link rel="stylesheet" href="../static/css/ems2.css" th:href="@{/css/ems2.css}" />
+</head>
+<body>
+  <!--[if lt IE 8]>
+    <p class="browserupgrade">
+      You are using an <strong>outdated</strong> browser. 
+      Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <header>
+    <!-- full page width header -->
+    <a href="../static/images/logo-electromagnetic-software966x966.png" th:href="@{/images/logo-electromagnetic-software966x966.png}">
+      <img class="logo" 
+           src="../static/images/logo-electromagnetic-software64x64.png"
+           th:src="@{/images/logo-electromagnetic-software64x64.png}"
+           alt="Electromagnetic Software"/>
+    </a>
+    <img class="banner" src="../static/images/hansen-hue-app.png" alt="Hansen Hue App"/>
+    <div class="date">Sat Dec 03, 2016 10:21 pm</div>
+    <div class="user-info">
+      <form action="#" th:action="@{/index}" th:object="${bridge}" method="post">
+        <label th:for="${#ids.next('ipAddress')}" th:text="#{bridge.ipAddress}">IP Address</label>
+        <input type="text" name="ipAddress" th:field="*{ipAddress}" />
+        <br/>
+        <label th:for="${#ids.next('username')}" th:text="#{bridge.username}">User Name</label>
+        <input type="text" th:field="*{username}" />
+      </form>
+    </div>
+  </header>
+  <div class="container">
+
+    <main>
+      <div class="content">
+      <article>
+        <!-- main body content begins here -->
+
+        <h1 id="top">Hue Light Status</h1>
+        <p>Status as reported by the Hue Bridge.</p>
+
+        <table class="mainTable">
+			<thead>
+				<tr>
+					<th th:text="#{lightlist.name}">Light</th>
+					<th th:text="#{lightlist.on}">On</th>
+					<th th:text="#{lightlist.reachable}">Reachable</th>
+					<th th:text="#{lightlist.effect}">Effect</th>
+					<th th:text="#{lightlist.type}">Type</th>
+					<th th:text="#{lightlist.bri}">Brightness</th>
+					<th th:text="#{lightlist.hue}">Hue</th>
+					<th th:text="#{lightlist.sat}">Saturation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="light : ${allLights}">
+					<td th:text="${light.name}">name</td>
+					<td th:text="${light.state.on} ? #{on.true} : #{on.false}">on</td>
+					<td th:text="${light.state.reachable}">on</td>
+					<td th:text="${light.state.effect}">none</td>
+					<td th:text="${light.type}">type</td>
+					<td th:text="${light.state.bri}">unk</td>
+					<td th:text="${light.state.hue}">unk</td>
+					<td th:text="${light.state.sat}">unk</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+      </article>
+      </div><!-- end .content -->
+    </main>
+</div><!-- end .container -->
+
+  <footer>
+    <a href="../static/images/logo-electromagnetic-software966x966.png">
+      <img class="logo" src="../static/images/logo-electromagnetic-software64x64.png" width="64" height="64" alt="Electromagnetic Software"/>
+    </a>
+    <img class="banner" src="../static/images/hansen-hue-app.png" width="253" height="39" alt="Hansen Hue App"/>
+    <p id="bottom" class="copyright">
+      Copyright &copy;2016-2017 
+      <a href="mailto:barry@electromagneticsoftware.com">Electromagnetic Software, LLC</a></p>
+  </footer>
+</body>
+</html>
