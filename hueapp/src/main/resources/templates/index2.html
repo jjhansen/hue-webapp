@@ -64,7 +64,7 @@
 					<td th:text="${light.name}">name</td>
 					<td th:utext="${light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-12.gif" alt="On"/></td>
 					<td th:utext="${light.state.reachable} ? #{reachable.true} : #{reachable.false}">false <img src="../static/images/icon-exclamation-12.gif" alt="Unreachable"/></td>
-					<td th:text="${light.state.effect}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
+					<td th:utext="${light.state.effect=='colorloop'} ? #{effect.loop} : #{effect.none}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
 					<td th:text="${light.type}">type</td>
 					<td th:text="${light.state.bri}">unk</td>
 					<td th:text="${light.state.hue}">unk</td>
