@@ -16,23 +16,31 @@ body{
 	margin: 0;
 	padding: inherit 0 inherit 0;
 	background-color: #FFFFFF;
+	font-size: 12px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-
+div.island {
+	position: relative; /* provide anchor for positioning interior divs */
+}
 a:link, a:visited, a:hover {
 	text-decoration: underline;
 }
 /* -------------------------------------------- */
 /*   Heading section                            */
 /* -------------------------------------------- */
-header {
+header,
+footer {
 	margin: 0px;
 	height: 102px;
 	background-color: #FFFFFF;
 	background-repeat: no-repeat;
 	background-position: 100% 0%;
 }
-
+/* -------------------------------------------- */
+/*   Body content                               */
+/* -------------------------------------------- */
+div.container {
+}
 .centerFrame {
 	margin: 0;
 	width: 100%;
@@ -502,12 +510,15 @@ table.mainTable td.labelColumn
 /* -------------------------------------------- */
 /*   Footing section                            */
 /* -------------------------------------------- */
+footer {
+	border-bottom: none;
+}
 .footer {
-	color: #404040;
 	text-align: center;
 	vertical-align: bottom;
 	clear: both;
 	border-width: 2px;
+	color: #404040;
 	border-style: solid none solid none;
 	/* background-color: #CCFFFF;  DEBUG USE */
 }
@@ -518,6 +529,7 @@ table.mainTable td.labelColumn
 	padding-left: 0;
 	display:inline;
 } 
+
 .footer ul li {
 	margin-left: 0;
 	padding: 4px 9px 4px 8px;
