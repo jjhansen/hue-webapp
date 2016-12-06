@@ -20,11 +20,13 @@ body{
 	background-color: #191919;
 	font-size: 12px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
+	line-height: 175%;
 }
 div.island {
 	position: relative; /* provide anchor for positioning interior divs */
 	margin: 0 auto;
 	max-width: 940px;
+	min-height: 64px;	/* debug */
 }
 h1 { font-size: 24px; }
 h2 { font-size: 20px; }
@@ -38,22 +40,43 @@ a:link, a:visited, a:hover {
 header,
 footer {
 	margin: 0px;
-	height: 68px;
 	vertical-align: top;
 	background-color: #2a2929;
+	font-size: 12px;
 	border-bottom: 2px solid #f26a21;
 }
 img.logo {
-	padding: 2px 2px 0 2px;
+	display: inline-block;
+	padding-top: 6px;
+	padding-left: 0.5em;
 }
-div.date {
-	display: inline;
-	padding-left: 15%;
+img.banner {
+	display: inline-block;
+	vertical-align: top;
+	padding-top: 30px;
+	/*border: 1px dotted green;	/* debug */
+}
+td.date {
 	color: #f26a21;
-	font-size: smaller;
+	/*border: 1px dotted green;	/* debug */
 }
 div.user-info {
 	float: right;
+	vertical-align: top;
+	padding-top: 6px;
+	padding-right: 1.0em;
+	padding-left: 1em;
+	/*border: 1px dotted green;	/* debug */
+
+}
+table.user-info {
+}
+header input {
+	margin-left: 0.5em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	color: black;
+	background-color: #ebebeb;
 }
 /* -------------------------------------------- */
 /*   Body content                               */
