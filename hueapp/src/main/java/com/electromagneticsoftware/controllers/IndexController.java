@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.electromagneticsoftware.business.entities.Bridge;
@@ -14,7 +13,6 @@ import com.electromagneticsoftware.business.entities.repositories.BridgeReposito
 import com.electromagneticsoftware.business.entities.repositories.LightRepository;
 
 @Controller
-@RequestMapping("/")
 public class IndexController {
 	
 	private final LightRepository lightRepository;
@@ -29,8 +27,15 @@ public class IndexController {
 		return "index";
 	}
 	
-	@GetMapping
-	public ModelAndView list() {
+	@GetMapping("/")
+	public ModelAndView listNull() {
+		Bridge bridge = bridgeRepository.find();
+		Iterable<Light> lights = lightRepository.findAll( bridge );
+		return new ModelAndView( "index", "lights", lights );
+	}
+	
+	@GetMapping("/index")
+	public ModelAndView listIndex() {
 		Bridge bridge = bridgeRepository.find();
 		Iterable<Light> lights = lightRepository.findAll( bridge );
 		return new ModelAndView( "index", "lights", lights );

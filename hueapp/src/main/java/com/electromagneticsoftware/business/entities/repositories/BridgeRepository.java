@@ -13,7 +13,10 @@ public class BridgeRepository {
 		if ( null == bridge ) {
 			bridge = new Bridge();
 			bridge.setIpAddress( "192.168.2.111" );
-			bridge.setUsername( "3f451a9f534fab0714d7b6bc27208ba3" );
+			bridge.setIpAddress( "10.0.0.16" );
+//			bridge.setUsername( "3f451a9f534fab0714d7b6bc27208ba3" );
+			bridge.setUsername( "6sLwnkZeilDrDIm2M62DvuKcWX9KNSZ8tN4eouey" );
+			
 		}
 		return bridge;
 	}
