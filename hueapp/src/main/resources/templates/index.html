@@ -1,47 +1,76 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
- 
-    <title>Hue App</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" media="all" href="../static/css/ems.css" th:href="@{/css/ems.css}" />
+  <title th:text="#{title.application}">Hue App</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../static/css/normalize.min.css" th:href="@{/css/normalize.min.css}" />
+    <link rel="stylesheet" href="../static/css/ems.css" th:href="@{/css/ems.css}" />
 </head>
 <body>
-	<h2>Welcome to the Hansen Hue App</h2>
-	<p>Today is: <span th:text="${#dates.createNow()}">13 February 2016</span>.</p>
-	
-	<div>
-		<form action="#" th:action="@{/index}" th:object="${bridge}" method="post">
+  <header>
+    <div class="island">
+      <div class="user-info">
+        <form action="#" th:action="@{/index}" th:object="${bridge}" method="post">
+          <p class="date" th:text="${#dates.createNow()}">Sat Dec 05, 2016 10:21 pm</p>
 			<label th:for="${#ids.next('bridgeIp')}" th:text="#{bridge.bridgeIp}">IP Address</label>
 			<input type="text" name="bridgeIp" th:field="*{bridgeIp}" />
-			<label th:for="${#ids.next('username')}" th:text="#{bridge.username}">User Name</label>
-			<input type="text" th:field="*{username}" />			
-		</form>
-	</div>
-	
+          <br/>
+          <label th:for="${#ids.next('username')}" th:text="#{bridge.username}">User Name</label>
+          <input type="text" th:field="*{username}" value="3f451a9f534fab0714d7b6bc27208ba3" size="33" />
+        </form>
+      </div><!-- end .user-info -->
+    </div><!-- end .island -->
+  </header>
+  <div class="container">
+    <div class="island">
+
+      <main>
+        <div class="content">
+          <article>
+            <!-- main body content begins here -->
+
+            <h1 id="top" th:text="#{title.list}">Hue Light Status</h1>
+            <p>Status as reported by the Hue Bridge.</p>
+
 	<div class="lightlist" th:unless="${#lists.isEmpty(allLights)}">
 		<h2 th:text="#{title.list}">Light List</h2>
 		<table class="mainTable">
 			<thead>
 				<tr>
-					<th th:text="#{lightlist.name}">Name</th>
-					<th th:text="#{lightlist.on}">On</th>
+					<th th:text="#{lightlist.name}">Light</th>
+					<th th:text="#{lightlist.on}">Pwr</th>
 					<th th:text="#{lightlist.reachable}">Reachable</th>
 					<th th:text="#{lightlist.effect}">Effect</th>
 					<th th:text="#{lightlist.type}">Type</th>
+					<th th:text="#{lightlist.bri}">Level</th>
+					<th th:text="#{lightlist.hue}">Hue</th>
+					<th th:text="#{lightlist.sat}">Sat</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="light : ${allLights}">
 					<td th:text="${light.name}">name</td>
-					<td th:text="${light.state.on} ? #{on.true} : #{on.false}">on</td>
-					<td th:text="${light.state.reachable}">on</td>
-					<td th:text="${light.state.effect}">on</td>
+					<td th:utext="${light.state.on} ? #{on.true} : #{on.false}">on</td>
+					<td th:utext="${light.state.reachable}">on</td>
+					<td th:utext="${light.state.effect}">none</td>
 					<td th:text="${light.type}">type</td>
+					<td th:text="${light.state.bri}">unk</td>
+					<td th:text="${light.state.hue}">unk</td>
+					<td th:text="${light.state.sat}">unk</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+          </article>
+          </div><!-- end .content -->
+      </main>
+    </div><!-- end .island -->
+  </div><!-- end .container -->
+
+  <footer>
+    <div class="island">
+        Copyright &copy;2016-2017 
+    </div><!-- end .island -->
+  </footer>
 </body>
 </html>

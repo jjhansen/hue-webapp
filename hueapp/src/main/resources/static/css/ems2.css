@@ -5,23 +5,32 @@
 /*   Copyright 2016. Electromagnetic Software   */
 /* -------------------------------------------- */
 
-
-{ 
-padding: 0; 
-margin: 0; 
-border: 0; 
-}
+/* color key:
+	white #ffffff
+	orange	#f26a21
+	off wht	#ebebeb
+	lt gray	#2a2929
+	dk gray	#191919
+*/
 
 body{
 	margin: 0;
 	padding: inherit 0 inherit 0;
-	background-color: #FFFFFF;
+	color: white;
+	background-color: #191919;
 	font-size: 12px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
+	line-height: 175%;
 }
 div.island {
 	position: relative; /* provide anchor for positioning interior divs */
+	margin: 0 auto;
+	max-width: 940px;
+	min-height: 64px;	/* debug */
 }
+h1 { font-size: 24px; }
+h2 { font-size: 20px; }
+h3 { font-size: 16px; }
 a:link, a:visited, a:hover {
 	text-decoration: underline;
 }
@@ -31,15 +40,52 @@ a:link, a:visited, a:hover {
 header,
 footer {
 	margin: 0px;
-	height: 102px;
-	background-color: #FFFFFF;
-	background-repeat: no-repeat;
-	background-position: 100% 0%;
+	vertical-align: top;
+	background-color: #2a2929;
+	font-size: 12px;
+	border-bottom: 2px solid #f26a21;
+}
+img.logo {
+	display: inline-block;
+	padding-top: 6px;
+	padding-left: 0.5em;
+}
+img.banner {
+	display: inline-block;
+	vertical-align: top;
+	padding-top: 30px;
+	/*border: 1px dotted green;	/* debug */
+}
+td.date {
+	color: #f26a21;
+	/*border: 1px dotted green;	/* debug */
+}
+div.user-info {
+	float: right;
+	vertical-align: top;
+	padding-top: 6px;
+	padding-right: 1.0em;
+	padding-left: 1em;
+	/*border: 1px dotted green;	/* debug */
+
+}
+table.user-info {
+}
+header input {
+	margin-left: 0.5em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	color: black;
+	background-color: #ebebeb;
 }
 /* -------------------------------------------- */
 /*   Body content                               */
 /* -------------------------------------------- */
 div.container {
+	min-height: 320px;
+	padding: 1em;
+	color: #111111;
+	background-color: #ebebeb;
 }
 .centerFrame {
 	margin: 0;
@@ -54,7 +100,7 @@ div.container {
 }
 #today {
 	color: #008;
-} 
+}
 
 #navigation {
 	vertical-align:middle;
@@ -287,17 +333,23 @@ table.leftJustifiedTable td {
 }
 
 table.mainTable {
-	font-size: 0.75em; 
+	/*font-size: 1.0em;*/
 	border-style: none;
 	border-collapse: collapse;
-	margin-top: 5px;
-	margin-left: 5px; 
+	/*margin-top: 5px;*/
+	/*margin-left: 5px;*/
+}
+
+table.mainTable thead tr { 
+	background-color: #c8c8c8;
+}
+table.mainTable thead th {
+	text-align: left;
+	padding-right: 1em;
 }
 
 table.mainTable td { 
-	border: 0px;
-	font-size: 10px;
-	text-align: center;
+	padding-right: 1em;
 }
 
 table.mainTable td.labelColumn {
@@ -314,7 +366,6 @@ table.mainTable td.messageColumn {
 	text-align: left;
 	font-size: 11px;
 }
-
 
 table.mainTable td.fieldColumn {
 	border-width: 1px;
@@ -475,7 +526,7 @@ table.mainTable,
 table.mainTable td.fieldColumn,
 .leftNavColumn
 {
-	background-color: #EEF6FB;
+	/*background-color: #EEF6FB;*/
 }
 
 table.mainTable td.labelColumn,
@@ -507,11 +558,13 @@ table.mainTable td.labelColumn
 .messageWarn { color: orange; }
 .messageInfo { color: green; }
 .messageFatal { font-weight: bold; }
+
 /* -------------------------------------------- */
 /*   Footing section                            */
 /* -------------------------------------------- */
 footer {
 	border-bottom: none;
+	border-top: 2px solid #f26a21;
 }
 .footer {
 	text-align: center;
