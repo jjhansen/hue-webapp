@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	<header th:fragment="header">
+    <!-- background stripes are full width, and contain fixed-max-width island of content -->
+    <div class="island">
+      <a href="../static/images/logo-electromagnetic-software966x966.png" 
+         th:href="@{/images/logo-electromagnetic-software966x966.png}">
+        <img class="logo" 
+             src="../static/images/logo-electromagnetic-software64x64.png"
+             th:src="@{/images/logo-electromagnetic-software64x64.png}"
+             alt="Electromagnetic Software"/>
+      </a>
+      <a href="/index" th:href="@{/}">
+        <img class="banner" src="../static/images/hansen-hue-app.png" th:src="@{/images/hansen-hue-app.png}" th:alt="#{title.application}" alt="Hansen Hue App"/>
+      </a>
+    </div><!-- end .island -->
+  </header>
+</body>
+</html>

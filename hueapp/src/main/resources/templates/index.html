@@ -1,30 +1,21 @@
 <!doctype html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-  <title th:text="#{title.application}">Hue App 2</title>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="../static/css/normalize.min.css" th:href="@{/css/normalize.min.css}" />
-  <link rel="stylesheet" href="../static/css/ems2.css" th:href="@{/css/ems2.css}" />
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title th:text="#{title.application}">Hue App</title>
+	<th:block th:replace="fragments/css :: css" />
 </head>
 <body>
-  <!--[if lt IE 8]>
-    <p class="browserupgrade">
-      You are using an <strong>outdated</strong> browser. 
-      Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-  <header>
-    <!-- background stripes are full width, and contain fixed-max-width island of content -->
-    <div class="island">
-      <a href="../static/images/logo-electromagnetic-software966x966.png" 
-         th:href="@{/images/logo-electromagnetic-software966x966.png}">
-        <img class="logo" 
-             src="../static/images/logo-electromagnetic-software64x64.png"
-             th:src="@{/images/logo-electromagnetic-software64x64.png}"
-             alt="Electromagnetic Software"/>
-      </a>
-      <a href="/index2">
-        <img class="banner" src="../static/images/hansen-hue-app.png" th:src="@{/images/hansen-hue-app.png}" th:alt="#{title.application}" alt="Hansen Hue App"/>
-      </a>
+	<!--[if lt IE 8]>
+		<p class="browserupgrade">
+			You are using an <strong>outdated</strong> browser. 
+			Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+	<header th:replace="fragments/header :: header"></header>
+	<div class="container">
       <div class="user-info">
         <form action="#" th:action="@{/index}" th:object="${bridge}" method="post">
           <table class="user-info">
@@ -42,66 +33,45 @@
           </table>
         </form>
       </div><!-- end .user-info -->
-    </div><!-- end .island -->
-  </header>
-  <div class="container">
-    <div class="island">
+		<div class="island">
+			<div class="content">
+				<article>
+				<!-- main body content begins here -->
 
-      <main>
-        <div class="content">
-          <article>
-            <!-- main body content begins here -->
+					<h1 id="top" th:text="#{title.list}">Hue Light Status</h1>
+					<p>Status as reported by the Hue Bridge.</p>
 
-            <h1 id="top" th:text="#{title.list}">Hue Light Status</h1>
-            <p>Status as reported by the Hue Bridge.</p>
-
-		<table class="mainTable">
-			<thead>
-				<tr>
-					<th th:text="#{lightlist.name}">Light</th>
-					<th th:text="#{lightlist.on}">Pwr</th>
-					<th th:text="#{lightlist.reachable}">Reachable</th>
-					<th th:text="#{lightlist.effect}">Effect</th>
-					<th th:text="#{lightlist.type}">Type</th>
-					<th th:text="#{lightlist.bri}">Level</th>
-					<th th:text="#{lightlist.hue}">Hue</th>
-					<th th:text="#{lightlist.sat}">Sat</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="light : ${allLights}">
-					<td th:text="${light.name}">name</td>
-					<td th:utext="${light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-12.gif" alt="On"/></td>
-					<td th:utext="${light.state.reachable} ? #{reachable.true} : #{reachable.false}">false <img src="../static/images/icon-exclamation-12.gif" alt="Unreachable"/></td>
-					<td th:utext="${light.state.effect=='colorloop'} ? #{effect.loop} : #{effect.none}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
-					<td th:text="${light.type}">type</td>
-					<td th:text="${light.state.bri}">unk</td>
-					<td th:text="${light.state.hue}">unk</td>
-					<td th:text="${light.state.sat}">unk</td>
-				</tr>
-			</tbody>
-		</table>
-
-          </article>
-        </div><!-- end .content -->
-      </main>
-    </div><!-- end .island -->
-  </div><!-- end .container -->
-
-  <footer>
-    <div class="island">
-      <a href="../static/images/logo-electromagnetic-software966x966.png" 
-         th:href="@{/images/logo-electromagnetic-software966x966.png}">
-        <img class="logo" 
-             src="../static/images/logo-electromagnetic-software64x64.png"
-             th:src="@{/images/logo-electromagnetic-software64x64.png}"
-             alt="Electromagnetic Software"/>
-      </a>
-      <img class="banner" src="../static/images/hansen-hue-app.png" th:src="@{/images/hansen-hue-app.png}" alt="Hansen Hue App"/>
-      <p id="bottom" class="copyright">
-        Copyright &copy;2016-2017 
-        <a href="mailto:barry@electromagneticsoftware.com">Electromagnetic Software, LLC</a></p>
-    </div><!-- end .island -->
-  </footer>
+					<table class="mainTable">
+						<thead>
+							<tr>
+								<th th:text="#{lightlist.name}">Light</th>
+								<th th:text="#{lightlist.on}">Pwr</th>
+								<th th:text="#{lightlist.reachable}">Reachable</th>
+								<th th:text="#{lightlist.effect}">Effect</th>
+								<th th:text="#{lightlist.type}">Type</th>
+								<th th:text="#{lightlist.bri}">Level</th>
+								<th th:text="#{lightlist.hue}">Hue</th>
+								<th th:text="#{lightlist.sat}">Sat</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="light : ${allLights}">
+								<td th:text="${light.name}">name</td>
+								<td th:utext="${light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-12.gif" alt="On"/></td>
+								<td th:utext="${light.state.reachable} ? #{reachable.true} : #{reachable.false}">false <img src="../static/images/icon-exclamation-12.gif" alt="Unreachable"/></td>
+								<td th:utext="${light.state.effect=='colorloop'} ? #{effect.loop} : #{effect.none}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
+								<td th:text="${light.type}">type</td>
+								<td th:text="${light.state.bri}">unk</td>
+								<td th:text="${light.state.hue}">unk</td>
+								<td th:text="${light.state.sat}">unk</td>
+							</tr>
+						</tbody>
+					</table>
+				</article>
+			</div><!-- end .content -->
+		</div><!-- end .island -->
+	</div><!-- end .container -->
+	<footer th:replace="fragments/footer :: footer">&copy; 2017 Electromagnetic Software, LLC</footer>
+	<th:block th:replace="fragments/js :: js"></th:block>
 </body>
 </html>

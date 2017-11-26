@@ -1,67 +1,36 @@
-
 <!doctype html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-  <title th:text="#{title.application}">Hue App 2</title>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="../static/css/normalize.min.css" th:href="@{/css/normalize.min.css}" />
-  <link rel="stylesheet" href="../static/css/ems2.css" th:href="@{/css/ems2.css}" />
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title th:text="#{title.application}">Hue App 2</title>
+	<th:block th:replace="fragments/css :: css" />
 </head>
-  <!--[if lt IE 8]>
-    <p class="browserupgrade">
-      You are using an <strong>outdated</strong> browser. 
-      Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-  <header>
-    <!-- background stripes are full width, and contain fixed-max-width island of content -->
-    <div class="island">
-      <a href="../static/images/logo-electromagnetic-software966x966.png" 
-         th:href="@{/images/logo-electromagnetic-software966x966.png}">
-        <img class="logo" 
-             src="../static/images/logo-electromagnetic-software64x64.png"
-             th:src="@{/images/logo-electromagnetic-software64x64.png}"
-             alt="Electromagnetic Software"/>
-      </a>
-      <a href="/index" th:href="@{/}">
-        <img class="banner" src="../static/images/hansen-hue-app.png" th:src="@{/images/hansen-hue-app.png}" th:alt="#{title.application}" alt="Hansen Hue App"/>
-      </a>
-   </div>
-   </header>
-   <body>
-  <div class="container">
-    <div class="island">
+<body>
+	<!--[if lt IE 8]>
+		<p class="browserupgrade">
+			You are using an <strong>outdated</strong> browser. 
+			Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+	<header th:replace="fragments/header :: header"></header>
+	<div class="container">
+		<div class="island">
+			<div class="content">
+			 	<article>
+				<!-- main body content begins here -->
 
-        <div class="content">
-          <article>
-            <!-- main body content begins here -->
-
-            <h1 id="top" th:text="#{title.authorize}">Authorize App</h1>
-
-	<p>Not authorized to access HUE Bridge</p>
-	
-	<p>Press link button on hue bridge and then click <a href="#" th:href="@{/createUser}">here</a> to create a new user	</p>
-
-		<p th:if="${errorMessage}" th:text="${errorMessage}" class="text-error"/>
-		<p th:if="${errorDetail}" th:text="${errorDetail}" class="text-error"/>
-	</article>
+					<h1 id="top" th:text="#{title.authorize}">Authorize App</h1>
+					<p>Not authorized to access HUE Bridge</p>
+					<p>Press link button on hue bridge and then click <a href="#" th:href="@{/createUser}">here</a> to create a new user	</p>
+					<p th:if="${errorMessage}" th:text="${errorMessage}" class="text-error"/>
+					<p th:if="${errorDetail}" th:text="${errorDetail}" class="text-error"/>
+				</article>
+			</div>
+		</div>
 	</div>
-	</div>
-	</div>
-	  <footer>
-    <div class="island">
-      <a href="../static/images/logo-electromagnetic-software966x966.png" 
-         th:href="@{/images/logo-electromagnetic-software966x966.png}">
-        <img class="logo" 
-             src="../static/images/logo-electromagnetic-software64x64.png"
-             th:src="@{/images/logo-electromagnetic-software64x64.png}"
-             alt="Electromagnetic Software"/>
-      </a>
-      <img class="banner" src="../static/images/hansen-hue-app.png" th:src="@{/images/hansen-hue-app.png}" alt="Hansen Hue App"/>
-      <p id="bottom" class="copyright">
-        Copyright &copy;2016-2017 
-        <a href="mailto:barry@electromagneticsoftware.com">Electromagnetic Software, LLC</a></p>
-    </div><!-- end .island -->
-  </footer>
-	
+	<footer th:replace="fragments/footer :: footer">&copy; 2017 Electromagnetic Software, LLC</footer>
+	<th:block th:replace="fragments/js :: js"></th:block>
 </body>
 </html>

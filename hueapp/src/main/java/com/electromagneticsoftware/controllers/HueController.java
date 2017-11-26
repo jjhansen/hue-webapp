@@ -26,14 +26,14 @@ public class HueController {
 		if (null == bridge) {
 			return "discoverBridge";
 		}
-		return showBridgeAndLights(model, bridge);
+		showBridgeAndLights(model, bridge);
+		return "index";
 	}	
 		
-	private String showBridgeAndLights(Model model, BridgeProperties bridge) {
+	private void showBridgeAndLights(Model model, BridgeProperties bridge) {
 		model.addAttribute("bridge", bridge);
 		Iterable<Light> lights = lightService.findAll( bridge );
 		model.addAttribute("allLights", lights);
-		return "index";
 	}
 
 	@RequestMapping(value = "/createUser", method=RequestMethod.GET)
@@ -46,7 +46,8 @@ public class HueController {
 			model.addAttribute("errorDetail", e.getMessage());
 			return "discoverBridge";
 		}
-		return showBridgeAndLights(model, bridge);
+		showBridgeAndLights(model, bridge);
+		return "redirect:/";
 	}
 
 }

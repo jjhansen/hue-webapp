@@ -1,0 +1,20 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<footer class="container-fluid" th:fragment="footer">
+    <div class="island">
+      <a href="../static/images/logo-electromagnetic-software966x966.png" 
+         th:href="@{/images/logo-electromagnetic-software966x966.png}">
+        <img class="logo" 
+             src="../static/images/logo-electromagnetic-software64x64.png"
+             th:src="@{/images/logo-electromagnetic-software64x64.png}"
+             alt="Electromagnetic Software"/>
+      </a>
+      <img class="banner" src="../static/images/hansen-hue-app.png" th:src="@{/images/hansen-hue-app.png}" alt="Hansen Hue App"/>
+      <p id="bottom" class="copyright">
+        Copyright &copy;2016-2017 
+        <a href="mailto:barry@electromagneticsoftware.com">Electromagnetic Software, LLC</a></p>
+    </div><!-- end .island -->
+	</footer>
+</body>	
+</html>
