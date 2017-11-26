@@ -1,9 +1,13 @@
 package com.electromagneticsoftware.business.entities;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Light {
+public class Light implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private LightState state;
 	private String type;
 	private String name;

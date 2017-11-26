@@ -1,6 +1,7 @@
 package com.electromagneticsoftware.business.entities;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 //@JsonIgnoreProperties(ignoreUnknown = true)
-public class Lights {
+public class Lights implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private Map<String,Object> data = new HashMap<String,Object>();
 	private ObjectMapper objectMapper = new ObjectMapper();
 //	private Map<String,Light> lights;
