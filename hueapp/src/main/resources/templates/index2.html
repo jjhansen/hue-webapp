@@ -32,8 +32,8 @@
               <td colspan="2" class="date" th:text="${#dates.createNow()}">Sat Dec 05, 2016 10:21 pm</td>
             </tr>
             <tr>
-              <td><label th:for="${#ids.next('ipAddress')}" th:text="#{bridge.ipAddress}">IP Address</label></td>
-              <td><input type="text" name="ipAddress" th:field="*{ipAddress}" value="192.168.2.111" size="15" /></td>
+              <td><label th:for="${#ids.next('bridgeIp')}" th:text="#{bridge.bridgeIp}">IP Address</label></td>
+              <td><input type="text" name="bridgeIp" th:field="*{bridgeIp}" value="192.168.2.111" size="15" /></td>
             </tr>
             <tr>
               <td><label th:for="${#ids.next('username')}" th:text="#{bridge.username}">User Name</label></td>

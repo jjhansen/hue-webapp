@@ -28,6 +28,16 @@ public class HueController {
 		return showBridgeAndLights(model, bridge);
 	}	
 	
+	@RequestMapping(value = "/new", method=RequestMethod.GET)
+	public String newPage(Model model) {
+		BridgeProperties bridge = bridgeService.find();
+		if (null == bridge) {
+			return "discoverBridge";
+		}
+		showBridgeAndLights(model, bridge);
+		return "index2";
+	}	
+	
 	private String showBridgeAndLights(Model model, BridgeProperties bridge) {
 		model.addAttribute("bridge", bridge);
 		Iterable<Light> lights = lightService.findAll( bridge );
