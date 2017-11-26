@@ -3,7 +3,7 @@
 <head lang="en">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<title th:text="#{title.application}">Hue App 2</title>
 	<th:block th:replace="fragments/css :: css" />
@@ -15,18 +15,14 @@
 			Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 	<header th:replace="fragments/header :: header"></header>
-	<div class="container">
-		<div class="island">
-			<div class="content">
-			 	<article>
-				<!-- main body content begins here -->
-
-					<h1 id="top" th:text="#{title.authorize}">Authorize App</h1>
-					<p>Not authorized to access HUE Bridge</p>
-					<p>Press link button on hue bridge and then click <a href="#" th:href="@{/createUser}">here</a> to create a new user	</p>
-					<p th:if="${errorMessage}" th:text="${errorMessage}" class="text-error"/>
-					<p th:if="${errorDetail}" th:text="${errorDetail}" class="text-error"/>
-				</article>
+	<div class="container-fluid">
+     	<div class="row">
+     		<div class="col-xs-12">
+				<h1 id="top" th:text="#{title.authorize}">Authorize App</h1>
+				<p>Not authorized to access HUE Bridge</p>
+				<p>Press link button on hue bridge and then click <a href="#" th:href="@{/createUser}">here</a> to create a new user	</p>
+				<p th:if="${errorMessage}" th:text="${errorMessage}" class="text-error"/>
+				<p th:if="${errorDetail}" th:text="${errorDetail}" class="text-error"/>
 			</div>
 		</div>
 	</div>
