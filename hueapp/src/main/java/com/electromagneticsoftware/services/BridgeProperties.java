@@ -66,7 +66,7 @@ public class BridgeProperties implements Serializable {
 		this.username = username;
 	}
 
-	public void save() {
+	public void save() throws HueServiceException {
 		appConfig.save(bridgeIp, username);
 	}
 }

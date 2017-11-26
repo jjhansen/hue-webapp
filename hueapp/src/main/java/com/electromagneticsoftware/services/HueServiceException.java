@@ -1,6 +1,6 @@
 package com.electromagneticsoftware.services;
 
-public class HueServiceException extends RuntimeException {
+public class HueServiceException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 

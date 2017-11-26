@@ -15,7 +15,7 @@ import com.electromagneticsoftware.services.HueServiceException;
 @PropertySource(value="file:hue-app.properties", ignoreResourceNotFound=true)
 public class AppConfig {
 
-	public void save(String bridgeIp, String username) {
+	public void save(String bridgeIp, String username) throws HueServiceException {
 		try {
 			Properties props = new Properties();
 			props.setProperty("com.electromagneticsoftware.bridgeIp", bridgeIp);

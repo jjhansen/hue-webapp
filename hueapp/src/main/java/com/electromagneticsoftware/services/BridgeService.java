@@ -38,7 +38,7 @@ public class BridgeService {
 		return bridge;
 	}
 	
-	public BridgeProperties discoverBridge() {
+	public BridgeProperties discoverBridge() throws HueServiceException {
 		String ip = "192.168.1.23";
 		// TODO: use SSDP to find the bridge
 		BridgeProperties bridge = createUser(ip);
@@ -51,7 +51,7 @@ public class BridgeService {
 		return bridge;
 	}
 	
-	private BridgeProperties createUser(String ip) {
+	private BridgeProperties createUser(String ip) throws HueServiceException {
 		BridgeProperties bridge = null;
 		ApplicationLogin login = new ApplicationLogin();
 		String url = "http://" + ip + "/api";
@@ -71,9 +71,14 @@ public class BridgeService {
 				LOGGER.info("Got error from bridge request.");
 				@SuppressWarnings("unchecked")
 				Map<String, Object> errormap = (Map<String, Object>) response.get("error");
+				StringBuilder s = new StringBuilder();
+				s.append("Error: ");
 				for (String key : errormap.keySet()) {
 					LOGGER.info("Error: " + key + " : " + errormap.get(key).toString());
+					s.append(key + ": " + errormap.get(key).toString());
+					s.append(" ");
 				}
+				throw new HueServiceException(s.toString());
 			}
 		}
 		return bridge;

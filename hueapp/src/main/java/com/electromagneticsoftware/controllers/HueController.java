@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.electromagneticsoftware.business.entities.Light;
 import com.electromagneticsoftware.services.BridgeProperties;
 import com.electromagneticsoftware.services.BridgeService;
+import com.electromagneticsoftware.services.HueServiceException;
 import com.electromagneticsoftware.services.LightService;
 
 @Controller
@@ -27,17 +28,7 @@ public class HueController {
 		}
 		return showBridgeAndLights(model, bridge);
 	}	
-	
-	@RequestMapping(value = "/new", method=RequestMethod.GET)
-	public String newPage(Model model) {
-		BridgeProperties bridge = bridgeService.find();
-		if (null == bridge) {
-			return "discoverBridge";
-		}
-		showBridgeAndLights(model, bridge);
-		return "index2";
-	}	
-	
+		
 	private String showBridgeAndLights(Model model, BridgeProperties bridge) {
 		model.addAttribute("bridge", bridge);
 		Iterable<Light> lights = lightService.findAll( bridge );
@@ -47,9 +38,12 @@ public class HueController {
 
 	@RequestMapping(value = "/createUser", method=RequestMethod.GET)
 	public String createUser(Model model) {
-		BridgeProperties bridge = bridgeService.discoverBridge();
-		if (null == bridge) {
-			model.addAttribute("errMsg", "Error creating user");
+		BridgeProperties bridge;
+		try {
+			bridge = bridgeService.discoverBridge();
+		} catch (HueServiceException e) {
+			model.addAttribute("errorMessage", "Error authorizing application");
+			model.addAttribute("errorDetail", e.getMessage());
 			return "discoverBridge";
 		}
 		return showBridgeAndLights(model, bridge);

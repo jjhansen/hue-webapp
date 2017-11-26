@@ -1,22 +1,45 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-  <title th:text="#{title.application}">Hue App</title>
+  <title th:text="#{title.application}">Hue App 2</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="../static/css/normalize.min.css" th:href="@{/css/normalize.min.css}" />
-    <link rel="stylesheet" href="../static/css/ems.css" th:href="@{/css/ems.css}" />
+  <link rel="stylesheet" href="../static/css/ems2.css" th:href="@{/css/ems2.css}" />
 </head>
 <body>
+  <!--[if lt IE 8]>
+    <p class="browserupgrade">
+      You are using an <strong>outdated</strong> browser. 
+      Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
   <header>
+    <!-- background stripes are full width, and contain fixed-max-width island of content -->
     <div class="island">
+      <a href="../static/images/logo-electromagnetic-software966x966.png" 
+         th:href="@{/images/logo-electromagnetic-software966x966.png}">
+        <img class="logo" 
+             src="../static/images/logo-electromagnetic-software64x64.png"
+             th:src="@{/images/logo-electromagnetic-software64x64.png}"
+             alt="Electromagnetic Software"/>
+      </a>
+      <a href="/index2">
+        <img class="banner" src="../static/images/hansen-hue-app.png" th:src="@{/images/hansen-hue-app.png}" th:alt="#{title.application}" alt="Hansen Hue App"/>
+      </a>
       <div class="user-info">
         <form action="#" th:action="@{/index}" th:object="${bridge}" method="post">
-          <p class="date" th:text="${#dates.createNow()}">Sat Dec 05, 2016 10:21 pm</p>
-			<label th:for="${#ids.next('bridgeIp')}" th:text="#{bridge.bridgeIp}">IP Address</label>
-			<input type="text" name="bridgeIp" th:field="*{bridgeIp}" />
-          <br/>
-          <label th:for="${#ids.next('username')}" th:text="#{bridge.username}">User Name</label>
-          <input type="text" th:field="*{username}" value="3f451a9f534fab0714d7b6bc27208ba3" size="33" />
+          <table class="user-info">
+            <tr>
+              <td colspan="2" class="date" th:text="${#dates.createNow()}">Sat Dec 05, 2016 10:21 pm</td>
+            </tr>
+            <tr>
+              <td><label th:for="${#ids.next('bridgeIp')}" th:text="#{bridge.bridgeIp}">IP Address</label></td>
+              <td><input type="text" name="bridgeIp" th:field="*{bridgeIp}" value="192.168.2.111" size="15" /></td>
+            </tr>
+            <tr>
+              <td><label th:for="${#ids.next('username')}" th:text="#{bridge.username}">User Name</label></td>
+              <td><input type="text" th:field="*{username}" value="3f451a9f534fab0714d7b6bc27208ba3" size="33" /></td>
+            </tr>
+          </table>
         </form>
       </div><!-- end .user-info -->
     </div><!-- end .island -->
@@ -32,8 +55,6 @@
             <h1 id="top" th:text="#{title.list}">Hue Light Status</h1>
             <p>Status as reported by the Hue Bridge.</p>
 
-	<div class="lightlist" th:unless="${#lists.isEmpty(allLights)}">
-		<h2 th:text="#{title.list}">Light List</h2>
 		<table class="mainTable">
 			<thead>
 				<tr>
@@ -50,9 +71,9 @@
 			<tbody>
 				<tr th:each="light : ${allLights}">
 					<td th:text="${light.name}">name</td>
-					<td th:utext="${light.state.on} ? #{on.true} : #{on.false}">on</td>
-					<td th:utext="${light.state.reachable}">on</td>
-					<td th:utext="${light.state.effect}">none</td>
+					<td th:utext="${light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-12.gif" alt="On"/></td>
+					<td th:utext="${light.state.reachable} ? #{reachable.true} : #{reachable.false}">false <img src="../static/images/icon-exclamation-12.gif" alt="Unreachable"/></td>
+					<td th:utext="${light.state.effect=='colorloop'} ? #{effect.loop} : #{effect.none}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
 					<td th:text="${light.type}">type</td>
 					<td th:text="${light.state.bri}">unk</td>
 					<td th:text="${light.state.hue}">unk</td>
@@ -60,16 +81,26 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
+
           </article>
-          </div><!-- end .content -->
+        </div><!-- end .content -->
       </main>
     </div><!-- end .island -->
   </div><!-- end .container -->
 
   <footer>
     <div class="island">
+      <a href="../static/images/logo-electromagnetic-software966x966.png" 
+         th:href="@{/images/logo-electromagnetic-software966x966.png}">
+        <img class="logo" 
+             src="../static/images/logo-electromagnetic-software64x64.png"
+             th:src="@{/images/logo-electromagnetic-software64x64.png}"
+             alt="Electromagnetic Software"/>
+      </a>
+      <img class="banner" src="../static/images/hansen-hue-app.png" th:src="@{/images/hansen-hue-app.png}" alt="Hansen Hue App"/>
+      <p id="bottom" class="copyright">
         Copyright &copy;2016-2017 
+        <a href="mailto:barry@electromagneticsoftware.com">Electromagnetic Software, LLC</a></p>
     </div><!-- end .island -->
   </footer>
 </body>
