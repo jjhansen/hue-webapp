@@ -21,13 +21,17 @@ public class HueController {
 	private LightService lightService;
 	@Autowired
 	private BridgeService bridgeService;
+
+	private BridgeProperties bridge;
 	
 	@RequestMapping(value = "/", method=RequestMethod.GET)
 	public String list(Model model) {
-		BridgeProperties bridge = bridgeService.find();
 		if (null == bridge) {
-			return "discoverBridge";
-		}
+			bridge = bridgeService.find();
+			if (null == bridge) {
+				return "discoverBridge";
+			}
+		}	
 		showBridgeAndLights(model, bridge);
 		return "index";
 	}	
@@ -56,14 +60,66 @@ public class HueController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/manageLights", method=RequestMethod.POST, params={"xmas", "!on", "!off"})
-	public String manageLights(LightsForm lightsForm, Model model) {
-		BridgeProperties bridge = bridgeService.find();
+	@RequestMapping(value = "/manageLights", method=RequestMethod.POST, params={"xmas", "!on", "!off", "!loop"})
+	public String xmasLights(LightsForm lightsForm, Model model) {
 		if (null == bridge) {
-			return "discoverBridge";
-		}
+			bridge = bridgeService.find();
+			if (null == bridge) {
+				return "discoverBridge";
+			}
+		}	
 		try {
 			lightService.setXmasLights(bridge, lightsForm);
+		} catch (HueServiceException e) {
+			model.addAttribute("errorDetail", e.getMessage());
+			return "redirect:/";
+		}
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/manageLights", method=RequestMethod.POST, params={"!xmas", "on", "!off", "!loop"})
+	public String onLights(LightsForm lightsForm, Model model) {
+		if (null == bridge) {
+			bridge = bridgeService.find();
+			if (null == bridge) {
+				return "discoverBridge";
+			}
+		}	
+		try {
+			lightService.turnOnLights(bridge, lightsForm);
+		} catch (HueServiceException e) {
+			model.addAttribute("errorDetail", e.getMessage());
+			return "redirect:/";
+		}
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/manageLights", method=RequestMethod.POST, params={"!xmas", "!on", "off", "!loop"})
+	public String offLights(LightsForm lightsForm, Model model) {
+		if (null == bridge) {
+			bridge = bridgeService.find();
+			if (null == bridge) {
+				return "discoverBridge";
+			}
+		}	
+		try {
+			lightService.turnOffLights(bridge, lightsForm);
+		} catch (HueServiceException e) {
+			model.addAttribute("errorDetail", e.getMessage());
+			return "redirect:/";
+		}
+		return "redirect:/";
+	}
+	@RequestMapping(value = "/manageLights", method=RequestMethod.POST, params={"!xmas", "!on", "!off", "loop"})
+	public String loopLights(LightsForm lightsForm, Model model) {
+		if (null == bridge) {
+			bridge = bridgeService.find();
+			if (null == bridge) {
+				return "discoverBridge";
+			}
+		}	
+		try {
+			lightService.setLoopLights(bridge, lightsForm);
 		} catch (HueServiceException e) {
 			model.addAttribute("errorDetail", e.getMessage());
 			return "redirect:/";

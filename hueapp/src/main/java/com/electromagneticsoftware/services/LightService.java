@@ -27,13 +27,7 @@ public class LightService {
 	}
 
 	public void setXmasLights(BridgeProperties bridge, LightsForm lightsForm) throws HueServiceException {
-		List<String> ids = new ArrayList<String>();
-		List<FormLight> lights = lightsForm.getLights();
-		for (FormLight light : lights) {
-			if (light.getSelected()) {
-				ids.add(light.getId());
-			}
-		}
+		List<String> ids = getSelectedLights(lightsForm);
 		LightStateUpdate update = new LightStateUpdate();
 		update.setOn(true);
 		update.setHue(360L);	// red is 360 degrees
@@ -46,4 +40,52 @@ public class LightService {
 			throw new HueServiceException("Unable to set state for lights");
 		}
 	}
+
+	public void turnOnLights(BridgeProperties bridge, LightsForm lightsForm) throws HueServiceException {
+		List<String> ids = getSelectedLights(lightsForm);
+		LightStateUpdate update = new LightStateUpdate();
+		update.setOn(true);
+		try {
+			lightRepository.setState(bridge, ids, update);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			throw new HueServiceException("Unable to set state for lights");
+		}
+	}
+
+	public void turnOffLights(BridgeProperties bridge, LightsForm lightsForm) throws HueServiceException {
+		List<String> ids = getSelectedLights(lightsForm);
+		LightStateUpdate update = new LightStateUpdate();
+		update.setOn(false);
+		try {
+			lightRepository.setState(bridge, ids, update);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			throw new HueServiceException("Unable to set state for lights");
+		}
+	}
+
+	public void setLoopLights(BridgeProperties bridge, LightsForm lightsForm) throws HueServiceException {
+		List<String> ids = getSelectedLights(lightsForm);
+		LightStateUpdate update = new LightStateUpdate();
+		update.setOn(true);
+		update.setEffect("colorloop");
+		try {
+			lightRepository.setState(bridge, ids, update);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			throw new HueServiceException("Unable to set state for lights");
+		}
+	}
+	private List<String> getSelectedLights(LightsForm lightsForm) {
+		List<String> ids = new ArrayList<String>();
+		List<FormLight> lights = lightsForm.getLights();
+		for (FormLight light : lights) {
+			if (light.getSelected()) {
+				ids.add(light.getId());
+			}
+		}
+		return ids;
+	}
+
 }
