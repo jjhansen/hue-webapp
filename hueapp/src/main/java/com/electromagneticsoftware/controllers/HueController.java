@@ -1,5 +1,7 @@
 package com.electromagneticsoftware.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,8 +34,12 @@ public class HueController {
 		
 	private void showBridgeAndLights(Model model, BridgeProperties bridge) {
 		model.addAttribute("bridge", bridge);
-		Iterable<Light> lights = lightService.findAll( bridge );
-		model.addAttribute("allLights", lights);
+		List<Light> lights = lightService.findAll(bridge);
+		lights.sort((m1, m2) -> {
+			return (Integer.valueOf(m1.getId()).compareTo(Integer.valueOf(m2.getId())));
+		});
+		LightsForm form = new LightsForm(lights);
+		model.addAttribute("lightsForm", form);
 	}
 
 	@RequestMapping(value = "/createUser", method=RequestMethod.GET)
@@ -47,6 +53,21 @@ public class HueController {
 			return "discoverBridge";
 		}
 		showBridgeAndLights(model, bridge);
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/manageLights", method=RequestMethod.POST, params={"xmas", "!on", "!off"})
+	public String manageLights(LightsForm lightsForm, Model model) {
+		BridgeProperties bridge = bridgeService.find();
+		if (null == bridge) {
+			return "discoverBridge";
+		}
+		try {
+			lightService.setXmasLights(bridge, lightsForm);
+		} catch (HueServiceException e) {
+			model.addAttribute("errorDetail", e.getMessage());
+			return "redirect:/";
+		}
 		return "redirect:/";
 	}
 
