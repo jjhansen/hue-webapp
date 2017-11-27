@@ -5,11 +5,23 @@
 /*   Copyright 2016. Electromagnetic Software   */
 /* -------------------------------------------- */
 
+/* color key:
+	white   #ffffff
+	orange 	#f26a21
+	off wht #ebebeb
+	lt gray #2a2929
+	dk gray #191919
+*/
 header {
-	background-color: #292929;
 	padding-top: 4px;
 	border-bottom: 4px solid #f26a21; 
+	background-color: #292929;
 }
+footer {
+	padding-top: 1rem;
+	font-size: small;
+	background-color: #ebebeb;
+}}
 .mainTable td {
 	background-color: #feefe7;
 	border-right: 2px solid white;
@@ -17,6 +29,9 @@ header {
 }
 
 .mainTable th {
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	text-align: center;
 	background-color: #f26a21;
 	border-right: 2px solid white;
 	border-bottom: 2px solid white;
