@@ -48,7 +48,7 @@
 								</td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].id}">1</td>
 								<td class="text-left" th:text="*{lights[__${iter.index}__].light.name}">name</td>
-								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-12.gif" alt="On"/></td>
+								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-on-12.gif" alt="On"/></td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.reachable} ? #{reachable.true} : #{reachable.false}">false <img src="../static/images/icon-exclamation-12.gif" alt="Unreachable"/></td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.effect=='colorloop'} ? #{effect.loop} : #{effect.none}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.bri}">unk</td>
