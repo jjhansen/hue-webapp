@@ -36,9 +36,9 @@ public class LightService {
 		}
 		LightStateUpdate update = new LightStateUpdate();
 		update.setOn(true);
-		update.setHue(360L);
-		update.setSat(100L);
-		update.setBri(100L);
+		update.setHue(360L);	// red is 360 degrees
+		update.setSat(255L);	// max is 255
+		update.setBri(255L);	// max is 255
 		try {
 			lightRepository.setState(bridge, ids, update);
 		} catch (JsonProcessingException e) {

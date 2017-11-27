@@ -16,16 +16,16 @@
 	<![endif]-->
 	<header th:replace="fragments/header :: header"></header>
 	<div class="container-fluid">
-     	<div class="row">
-     		<div class="col-sm-6">
+		<div class="row">
+			<div class="col-sm-6">
 		 		<h1 id="top" th:text="#{title.list}">Hue Light Status</h1>
 				<p>Status as reported by the Hue Bridge.</p>
 			</div>
 		</div>
 		<p th:if="${errorDetail}" th:text="${errorDetail}" class="text-error"/>
 		<div class="row">
-			<form id="editLightsForm" action="#" th:action="@{/manageLights}" th:object="${lightsForm}" method="post" class="form-horizontal">
-				<div class="col-xs-12 col-md-10">	
+			<div class="col">
+				<form id="editLightsForm" action="#" th:action="@{/manageLights}" th:object="${lightsForm}" method="post" class="form-horizontal">
 					<table class="mainTable">
 						<thead>
 							<tr>
@@ -47,8 +47,7 @@
 									<input th:type="hidden" th:field="*{lights[__${iter.index}__].id}"/>
 								</td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].id}">1</td>
-								<td class="text-left" th:text="*{lights[__${iter.index}__].light.name}">name
-								</td>
+								<td class="text-left" th:text="*{lights[__${iter.index}__].light.name}">name</td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-12.gif" alt="On"/></td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.reachable} ? #{reachable.true} : #{reachable.false}">false <img src="../static/images/icon-exclamation-12.gif" alt="Unreachable"/></td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.effect=='colorloop'} ? #{effect.loop} : #{effect.none}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
@@ -58,9 +57,9 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>
-				<input class="btn btn-default" type="submit" name="xmas" value="xmas" th:value="#{button.xmas}"/>
-			</form>
+					<input class="btn btn-default" type="submit" name="xmas" value="xmas" th:value="#{button.xmas}"/>
+				</form>
+			</div>
 		</div>
 		<br />
       	<div class="row">

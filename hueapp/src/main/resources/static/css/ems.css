@@ -27,6 +27,9 @@ footer {
 	border-right: 2px solid white;
 	border-bottom: 2px solid white;
 }
+.mainTable .text-right {
+	padding-right: 6px;
+}
 
 .mainTable th {
 	padding-left: 0.5rem;
