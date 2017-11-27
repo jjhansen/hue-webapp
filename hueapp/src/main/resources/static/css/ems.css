@@ -5,7 +5,11 @@
 /*   Copyright 2016. Electromagnetic Software   */
 /* -------------------------------------------- */
 
-
+header {
+	background-color: #292929;
+	padding-top: 4px;
+	border-bottom: 4px solid #f26a21; 
+}
 .mainTable td {
 	background-color: #feefe7;
 	border-right: 2px solid white;
