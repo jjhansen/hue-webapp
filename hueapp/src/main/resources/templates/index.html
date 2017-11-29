@@ -57,7 +57,7 @@
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.hue}">unk</td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.sat}">unk</td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.rgb}">unk </td>
-								<td class="text-center"><div style="background-color:#f26a21; width:2em; height:1em; margin-left:auto; margin-right:auto;"></div></td>
+								<td class="text-center"><div th:style="'background-color:' + *{lights[__${iter.index}__].light.state.rgb} + '; width:2em; height:1em; margin-left:auto; margin-right:auto;'"></div></td>
 							</tr>
 						</tbody>
 					</table>
