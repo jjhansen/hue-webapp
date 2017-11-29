@@ -15,11 +15,13 @@ import com.electromagneticsoftware.services.HueServiceException;
 @PropertySource(value="file:hue-app.properties", ignoreResourceNotFound=true)
 public class AppConfig {
 
-	public void save(String bridgeIp, String username) throws HueServiceException {
+	public void save(String bridgeIp, String username, Long settleTime, Long sleepTime) throws HueServiceException {
 		try {
 			Properties props = new Properties();
 			props.setProperty("com.electromagneticsoftware.bridgeIp", bridgeIp);
 			props.setProperty("com.electromagneticsoftware.username", username);
+			props.setProperty("com.electromagneticsoftware.settleTime", settleTime.toString());
+			props.setProperty("com.electromagneticsoftware.sleepTime", sleepTime.toString());
 			File f = new File("hue-app.properties");
 			OutputStream out = new FileOutputStream(f);
 			DefaultPropertiesPersister p = new DefaultPropertiesPersister();

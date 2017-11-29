@@ -19,6 +19,8 @@ public class BridgeProperties implements Serializable {
 	
 	private String bridgeIp;
 	private String username;
+	private Long settleTime;
+	private Long sleepTime;
 	
 	@Override
 	public int hashCode() {
@@ -66,7 +68,23 @@ public class BridgeProperties implements Serializable {
 		this.username = username;
 	}
 
+	public Long getSettleTime() {
+		return settleTime;
+	}
+
+	public void setSettleTime(Long settleTime) {
+		this.settleTime = settleTime;
+	}
+
+	public Long getSleepTime() {
+		return sleepTime;
+	}
+
+	public void setSleepTime(Long sleepTime) {
+		this.sleepTime = sleepTime;
+	}
+
 	public void save() throws HueServiceException {
-		appConfig.save(bridgeIp, username);
+		appConfig.save(bridgeIp, username, settleTime, sleepTime);
 	}
 }

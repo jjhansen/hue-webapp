@@ -35,6 +35,10 @@ public class BridgeService {
 		if (StringUtils.isNotBlank(ip) && StringUtils.isNotBlank(username)) {
 			bridge = login(ip, username);
 		}
+		if (null != bridge) {
+			bridge.setSettleTime(properties.getSettleTime());
+			bridge.setSleepTime(properties.getSleepTime());
+		}
 		return bridge;
 	}
 	
@@ -46,6 +50,12 @@ public class BridgeService {
 			String username = bridge.getUsername();
 			properties.setBridgeIp(ip);
 			properties.setUsername(username);
+			if (null == properties.getSettleTime()) {
+				properties.setSettleTime(500L);
+			}
+			if (null == properties.getSleepTime()) {
+				properties.setSleepTime(4500L);
+			}
 			properties.save();
 		}
 		return bridge;

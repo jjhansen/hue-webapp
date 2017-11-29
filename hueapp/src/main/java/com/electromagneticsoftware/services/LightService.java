@@ -28,18 +28,13 @@ public class LightService {
 
 	public void setXmasLights(BridgeProperties bridge, LightsForm lightsForm) throws HueServiceException {
 		List<String> ids = getSelectedLights(lightsForm);
-		LightStateUpdate update = new LightStateUpdate();
-		update.setOn(true);
-		update.setHue(360L);	// red is 360 degrees
-		update.setSat(255L);	// max is 255
-		update.setBri(255L);	// max is 255
-		update.setEffect("none");
-		try {
-			lightRepository.setState(bridge, ids, update);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			throw new HueServiceException("Unable to set state for lights");
-		}
+		XmasRunnable myRunnable = new XmasRunnable();
+		myRunnable.setIds(ids);
+		myRunnable.setBridge(bridge);
+		myRunnable.setLightRepository(lightRepository);
+		String name = "xmas " + ids.toString();
+		Thread thread = new Thread(myRunnable, name);
+		thread.start();		
 	}
 
 	public void turnOnLights(BridgeProperties bridge, LightsForm lightsForm) throws HueServiceException {
@@ -49,6 +44,8 @@ public class LightService {
 		try {
 			lightRepository.setState(bridge, ids, update);
 		} catch (JsonProcessingException e) {
+			LOGGER.error("Unable to set state for lights");
+			LOGGER.error(e.getLocalizedMessage());
 			e.printStackTrace();
 			throw new HueServiceException("Unable to set state for lights");
 		}
@@ -61,6 +58,8 @@ public class LightService {
 		try {
 			lightRepository.setState(bridge, ids, update);
 		} catch (JsonProcessingException e) {
+			LOGGER.error("Unable to set state for lights");
+			LOGGER.error(e.getLocalizedMessage());
 			e.printStackTrace();
 			throw new HueServiceException("Unable to set state for lights");
 		}
@@ -74,6 +73,8 @@ public class LightService {
 		try {
 			lightRepository.setState(bridge, ids, update);
 		} catch (JsonProcessingException e) {
+			LOGGER.error("Unable to set state for lights");
+			LOGGER.error(e.getLocalizedMessage());
 			e.printStackTrace();
 			throw new HueServiceException("Unable to set state for lights");
 		}

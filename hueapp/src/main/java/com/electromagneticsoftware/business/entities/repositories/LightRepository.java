@@ -17,7 +17,6 @@ import com.electromagneticsoftware.business.entities.Light;
 import com.electromagneticsoftware.business.entities.LightStateUpdate;
 import com.electromagneticsoftware.business.entities.Lights;
 import com.electromagneticsoftware.services.BridgeProperties;
-import com.electromagneticsoftware.services.LightService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
