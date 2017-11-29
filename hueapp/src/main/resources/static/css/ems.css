@@ -39,3 +39,6 @@ footer {
 	border-right: 2px solid white;
 	border-bottom: 2px solid white;
 }
+.btn {
+	border: 1px solid #888;
+}
