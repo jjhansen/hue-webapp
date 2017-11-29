@@ -38,6 +38,8 @@
 								<th th:text="#{lightlist.bri}">Level</th>
 								<th th:text="#{lightlist.hue}">Hue</th>
 								<th th:text="#{lightlist.sat}">Sat</th>
+								<th th:text="#{lightlist.rgb}">RGB</th>
+								<th th:text="#{lightlist.sample}">Color</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -54,6 +56,8 @@
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.bri}">unk</td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.hue}">unk</td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.sat}">unk</td>
+								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.rgb}">unk </td>
+								<td class="text-center"><div style="background-color:#f26a21; width:2em; height:1em; margin-left:auto; margin-right:auto;"></div></td>
 							</tr>
 						</tbody>
 					</table>
