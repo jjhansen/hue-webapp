@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class LightState implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Boolean on;
-	private Long bri;
-	private Long hue;
-	private Long sat;
+	private Long hue;	// H = 0..65535
+	private Long sat;	// S = 0..255
+	private Long bri;	// L = 0..255
 	private String effect;
 	private Float[] xy;
 	private String alert;
@@ -42,74 +42,17 @@ public class LightState implements Serializable {
 	public void setSat(Long sat) {
 		this.sat = sat;
 	}
-	public String getRgb() {
-		// implements HSL -> RGB
-		// see JavaScript source code, http://www.rapidtables.com/convert/color/hsl-to-rgb.htm
-		float h = hue;		// h = document.calcform.h.value;
-		float s = sat;		// s = document.calcform.s.value;
-		float l = bri;		// l = document.calcform.l.value;
-							// if( h=="" ) h=0;
-							// if( s=="" ) s=0;
-							// if( l=="" ) l=0;
-							// h = parseFloat(h);
-							// s = parseFloat(s);
-							// l = parseFloat(l);
-		if (h<0) h=0.0f;	// if( h<0 ) h=0;
-		if (s<0) s=0.0f;	// if( s<0 ) s=0;
-		if (l<0) l=0.0f;	// if l<0 ) l=0;
+	public String getHSLcode() {
+		// returns a string suitable for CSS color attribute, e.g. { color: hsl(120, 100%, 50%) } /* lime */
+		// example: suppose the current color is lime
+		//     e.g. (hue,sat,bri) = (120, 255, 127)
+		// returns: "hsl(120, 100%, 50%)"
+		Long hh = this.hue*360/65535L;
+		Long ss = this.sat*100/255L;
+		Long ll = this.bri*100/255L;
+		String result = String.format("hsl(%d, %d%%, %d%%)", hh, ss, ll);
+		return result;
 
-		if (h>= 65535)		// if( h>=360 ) h=359;
-			h=65535.0f;	
-		if (s>255)			// if( s>100 ) s=100;
-			s=255.0f;
-		if (l>255)			// if( l>100 ) l=100;
-			l=255.0f;
-
-		s = s/255.0f;		// s/=100;
-		l = l/255.0f;		// l/=100;
-
-		float C = (1-Math.abs(l*2-1))*s;	// C = (1-Math.abs(2*l-1))*s;
-		float hh = h/60;					// hh = h/60;
-		float X = C*(1-Math.abs(hh%2-1));	// X = C*(1-abs(hh%2-1));
-
-		float r, g, b;
-		r = g = b = 0;
-		if( hh>=0 && hh<1 ) {
-			r = C;
-			g = X;
-		} else if( hh>=1 && hh<2 ) {
-			r = X;
-			g = C;
-		} else if( hh>=2 && hh<3 ) {
-			g = C;
-			b = X;
-		} else if( hh>=3 && hh<4 ) {
-			g = X;
-			b = C;
-		} else if( hh>=4 && hh<5 ) {
-			r = X;
-			b = C;
-		} else {
-			r = C;
-			b = X;
-		}
-
-		float m = l-C/2;
-		r += m;
-		g += m;
-		b += m;
-
-		r *= 255.0;
-		g *= 255.0;
-		b *= 255.0;
-
-		r = Math.round(r);
-		g = Math.round(g);
-		b = Math.round(b);
-
-		int hexval = Math.round(r*65536 + g*256 + b);
-		String hex_rgb_string = String.format("#%06x", hexval);
-		return hex_rgb_string;
 	}
 	public void setRgb(Long rgb) {
 		// to implement RGB -> HSL

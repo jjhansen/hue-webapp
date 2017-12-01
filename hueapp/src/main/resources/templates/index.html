@@ -35,10 +35,9 @@
 								<th th:text="#{lightlist.on}">Pwr</th>
 								<th th:text="#{lightlist.reachable}">Reachable</th>
 								<th th:text="#{lightlist.effect}">Effect</th>
-								<th th:text="#{lightlist.bri}">Level</th>
 								<th th:text="#{lightlist.hue}">Hue</th>
 								<th th:text="#{lightlist.sat}">Sat</th>
-								<th th:text="#{lightlist.rgb}">RGB</th>
+								<th th:text="#{lightlist.bri}">Lvl</th>
 								<th th:text="#{lightlist.sample}">Color</th>
 							</tr>
 						</thead>
@@ -53,11 +52,10 @@
 								<td class="text-center" th:utext="*{lights[__${iter.index}__].light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-on-12.gif" alt="On"/></td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.reachable} ? #{reachable.true} : #{reachable.false}">false <img src="../static/images/icon-exclamation-12.gif" alt="Unreachable"/></td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.effect=='colorloop'} ? #{effect.loop} : #{effect.none}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
-								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.bri}">unk</td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.hue}">unk</td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.sat}">unk</td>
-								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.rgb}">unk </td>
-								<td class="text-center"><div th:style="'background-color:' + *{lights[__${iter.index}__].light.state.rgb} + '; width:2em; height:1em; margin-left:auto; margin-right:auto;'"></div></td>
+								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.bri}">unk</td>
+								<td class="text-center"><div class="colortile" th:style="'background-color: ' + *{lights[__${iter.index}__].light.state.hSLcode} + ';'"></div></td>
 							</tr>
 						</tbody>
 					</table>
@@ -69,14 +67,14 @@
 			</div>
 		</div>
 		<br />
-      	<div class="row">
-            <div class="col-sm-2"><span th:text="#{bridge.bridgeIp}">IP Address</span></div>
-            <div class="col-sm-4"><span th:text="${bridge.bridgeIp}">192.168.2.111</span></div>
+		<div class="row">
+			<div class="col-sm-2"><span th:text="#{bridge.bridgeIp}">IP Address</span></div>
+			<div class="col-sm-4"><span th:text="${bridge.bridgeIp}">192.168.2.111</span></div>
 		</div>
-     	<div class="row">
-            <div class="col-sm-2"><span th:text="#{bridge.username}">IP Address</span></div>
-            <div class="col-sm-4"><span th:text="${bridge.username}">3f451a9f534fab0714d7b6bc27208ba3</span></div>
-        </div>
+		<div class="row">
+			<div class="col-sm-2"><span th:text="#{bridge.username}">IP Address</span></div>
+			<div class="col-sm-4"><span th:text="${bridge.username}">3f451a9f534fab0714d7b6bc27208ba3</span></div>
+		</div>
 	</div>
 	<footer th:replace="fragments/footer :: footer">&copy; 2017 Electromagnetic Software, LLC</footer>
 	<th:block th:replace="fragments/js :: js"></th:block>
