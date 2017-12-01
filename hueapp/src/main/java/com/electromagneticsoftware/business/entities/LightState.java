@@ -1,7 +1,6 @@
 package com.electromagneticsoftware.business.entities;
 
 import java.io.Serializable;
-import java.lang.Math;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -46,27 +46,22 @@ public class XmasRunnable implements Runnable {
 				}
 				try {
 					lightRepository.setState(bridge, ids, update);
-				} catch (Exception e) {
+				} catch (JsonProcessingException e) {
 					LOGGER.error(e.getLocalizedMessage());
 					e.printStackTrace();
 					keepGoing = false;
 				}
 				try {
 					Thread.sleep(settleTime);
-				} catch (InterruptedException e1) {
-					LOGGER.info("xmas thread interrupted: " + e1.getLocalizedMessage());
-					keepGoing = false;
-				}
-				try {
-					Light light = lightRepository.findLight(Long.valueOf(ids.get(0)), bridge);
-					lastState = light.getState();
-				} catch (Exception e) {
+				} catch (InterruptedException e) {
 					LOGGER.info("xmas thread interrupted: " + e.getLocalizedMessage());
 					keepGoing = false;
 				}
+				Light light = lightRepository.findLight(Long.valueOf(ids.get(0)), bridge);
+				lastState = light.getState();
 				try {
 					Thread.sleep(sleepTime);
-				} catch (Exception e) {
+				} catch (InterruptedException e) {
 					LOGGER.info("xmas thread interrupted: " + e.getLocalizedMessage());
 					keepGoing = false;
 				}
@@ -78,11 +73,12 @@ public class XmasRunnable implements Runnable {
 	private Boolean checkForChanges() {
 		Light light = lightRepository.findLight(Long.valueOf(ids.get(0)), bridge);
 		LightState currentState = light.getState();
-		if (false == currentState.hueSatEquals(lastState)) {
+		boolean result = currentState.hueSatEquals(lastState);
+		if (!result) {
 			LOGGER.info("current:  " + currentState.toString());
 			LOGGER.info("previous: " + lastState.toString());
 		}
-		return currentState.equals(lastState);
+		return result;
 	}
 
 	private void setRed(LightStateUpdate update) {
