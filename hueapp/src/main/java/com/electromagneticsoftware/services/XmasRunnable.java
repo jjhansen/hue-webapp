@@ -46,7 +46,7 @@ public class XmasRunnable implements Runnable {
 				}
 				try {
 					lightRepository.setState(bridge, ids, update);
-				} catch (JsonProcessingException e) {
+				} catch (Exception e) {
 					LOGGER.error(e.getLocalizedMessage());
 					e.printStackTrace();
 					keepGoing = false;
@@ -54,13 +54,20 @@ public class XmasRunnable implements Runnable {
 				try {
 					Thread.sleep(settleTime);
 				} catch (InterruptedException e1) {
+					LOGGER.info("xmas thread interrupted: " + e1.getLocalizedMessage());
 					keepGoing = false;
 				}
-				Light light = lightRepository.findLight(Long.valueOf(ids.get(0)), bridge);
-				lastState = light.getState();
+				try {
+					Light light = lightRepository.findLight(Long.valueOf(ids.get(0)), bridge);
+					lastState = light.getState();
+				} catch (Exception e) {
+					LOGGER.info("xmas thread interrupted: " + e.getLocalizedMessage());
+					keepGoing = false;
+				}
 				try {
 					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
+				} catch (Exception e) {
+					LOGGER.info("xmas thread interrupted: " + e.getLocalizedMessage());
 					keepGoing = false;
 				}
 			}
@@ -71,7 +78,7 @@ public class XmasRunnable implements Runnable {
 	private Boolean checkForChanges() {
 		Light light = lightRepository.findLight(Long.valueOf(ids.get(0)), bridge);
 		LightState currentState = light.getState();
-		if (false == currentState.equals(lastState)) {
+		if (false == currentState.hueSatEquals(lastState)) {
 			LOGGER.info("current:  " + currentState.toString());
 			LOGGER.info("previous: " + lastState.toString());
 		}
@@ -82,7 +89,7 @@ public class XmasRunnable implements Runnable {
 		update.setOn(true);
 		update.setHue(0L);		// red is 0
 		update.setSat(254L);	// max is 254
-		update.setBri(254L);	// max is 254
+//		update.setBri(254L);	// max is 254
 		update.setEffect("none");
 	}
 
@@ -90,7 +97,7 @@ public class XmasRunnable implements Runnable {
 		update.setOn(true);
 		update.setHue(25500L);	// green is 25500  
 		update.setSat(254L);	// max is 254
-		update.setBri(254L);	// max is 254
+//		update.setBri(254L);	// max is 254
 		update.setEffect("none");
 	}
 

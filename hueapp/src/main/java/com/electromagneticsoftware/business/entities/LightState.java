@@ -226,5 +226,29 @@ public class LightState implements Serializable {
 		return true;
 	}
 	
-	
+	public boolean hueSatEquals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LightState other = (LightState) obj;
+		if (hue == null) {
+			if (other.hue != null)
+				return false;
+		} else if (!hue.equals(other.hue))
+			return false;
+		if (hue == null) {
+			if (other.hue != null)
+				return false;
+		} else if (!hue.equals(other.hue))
+			return false;
+		if (on == null) {
+			if (other.on != null)
+				return false;
+		} else if (!on.equals(other.on))
+			return false;
+		return true;
+	}
 }
