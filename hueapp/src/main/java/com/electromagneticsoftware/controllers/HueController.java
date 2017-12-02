@@ -2,11 +2,13 @@ package com.electromagneticsoftware.controllers;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.electromagneticsoftware.business.entities.Light;
 import com.electromagneticsoftware.services.BridgeProperties;
@@ -60,8 +62,13 @@ public class HueController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/manageLights", method=RequestMethod.POST, params={"xmas", "!on", "!off", "!loop"})
-	public String xmasLights(LightsForm lightsForm, Model model) {
+	@RequestMapping(value = "/manageLights", method=RequestMethod.POST)
+	public String manageLights(@RequestParam(value = "xmas", required = false) String xmas,
+			@RequestParam(value = "on", required = false) String on,
+			@RequestParam(value = "off", required = false) String off,
+			@RequestParam(value = "loop", required = false) String loop,
+			LightsForm lightsForm, 
+			Model model) {
 		if (null == bridge) {
 			bridge = bridgeService.find();
 			if (null == bridge) {
@@ -69,57 +76,18 @@ public class HueController {
 			}
 		}	
 		try {
-			lightService.setXmasLights(bridge, lightsForm);
-		} catch (HueServiceException e) {
-			model.addAttribute("errorDetail", e.getMessage());
-			return "redirect:/";
-		}
-		return "redirect:/";
-	}
-
-	@RequestMapping(value = "/manageLights", method=RequestMethod.POST, params={"!xmas", "on", "!off", "!loop"})
-	public String onLights(LightsForm lightsForm, Model model) {
-		if (null == bridge) {
-			bridge = bridgeService.find();
-			if (null == bridge) {
-				return "discoverBridge";
+			if (null != xmas) {
+				lightService.setXmasLights(bridge, lightsForm);
 			}
-		}	
-		try {
-			lightService.turnOnLights(bridge, lightsForm);
-		} catch (HueServiceException e) {
-			model.addAttribute("errorDetail", e.getMessage());
-			return "redirect:/";
-		}
-		return "redirect:/";
-	}
-
-	@RequestMapping(value = "/manageLights", method=RequestMethod.POST, params={"!xmas", "!on", "off", "!loop"})
-	public String offLights(LightsForm lightsForm, Model model) {
-		if (null == bridge) {
-			bridge = bridgeService.find();
-			if (null == bridge) {
-				return "discoverBridge";
+			if (null != on) {
+				lightService.turnOnLights(bridge, lightsForm);
 			}
-		}	
-		try {
-			lightService.turnOffLights(bridge, lightsForm);
-		} catch (HueServiceException e) {
-			model.addAttribute("errorDetail", e.getMessage());
-			return "redirect:/";
-		}
-		return "redirect:/";
-	}
-	@RequestMapping(value = "/manageLights", method=RequestMethod.POST, params={"!xmas", "!on", "!off", "loop"})
-	public String loopLights(LightsForm lightsForm, Model model) {
-		if (null == bridge) {
-			bridge = bridgeService.find();
-			if (null == bridge) {
-				return "discoverBridge";
+			if (null != off) {
+				lightService.turnOffLights(bridge, lightsForm);
 			}
-		}	
-		try {
-			lightService.setLoopLights(bridge, lightsForm);
+			if (null != loop) {
+				lightService.setLoopLights(bridge, lightsForm);
+			}
 		} catch (HueServiceException e) {
 			model.addAttribute("errorDetail", e.getMessage());
 			return "redirect:/";
