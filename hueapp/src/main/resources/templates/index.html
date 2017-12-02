@@ -29,10 +29,10 @@
 					<table class="mainTable">
 						<thead>
 							<tr>
-								<th th:text="#{lightlist.select}">Select</th>
-								<th th:text="#{lightlist.id}">Id</th>
-								<th th:text="#{lightlist.name}">Light</th>
+								<th th:utext="#{lightlist.select}">Select</th>
 								<th th:text="#{lightlist.on}">Pwr</th>
+								<th th:text="#{lightlist.name}">Light</th>
+								<th th:text="#{lightlist.id}">Id</th>
 								<th th:text="#{lightlist.reachable}">Reachable</th>
 								<th th:text="#{lightlist.effect}">Effect</th>
 								<th th:text="#{lightlist.hue}">Hue</th>
@@ -47,9 +47,9 @@
 									<input th:id="${iter.index}" th:type="checkbox" th:field="*{lights[__${iter.index}__].selected}"/>
 									<input th:type="hidden" th:field="*{lights[__${iter.index}__].id}"/>
 								</td>
-								<td class="text-right" th:text="*{lights[__${iter.index}__].id}">1</td>
-								<td class="text-left" th:text="*{lights[__${iter.index}__].light.name}">name</td>
 								<td class="text-center" th:utext="*{lights[__${iter.index}__].light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-on-12.gif" alt="On"/></td>
+								<td class="text-left" th:text="*{lights[__${iter.index}__].light.name}">name</td>
+								<td class="text-right" th:text="*{lights[__${iter.index}__].id}">1</td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.reachable} ? #{reachable.true} : #{reachable.false}">false <img src="../static/images/icon-exclamation-12.gif" alt="Unreachable"/></td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.effect=='colorloop'} ? #{effect.loop} : #{effect.none}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.hue}">unk</td>
