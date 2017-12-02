@@ -67,6 +67,7 @@ public class HueController {
 			@RequestParam(value = "on", required = false) String on,
 			@RequestParam(value = "off", required = false) String off,
 			@RequestParam(value = "loop", required = false) String loop,
+			@RequestParam(value = "sounders", required = false) String sounders,
 			LightsForm lightsForm, 
 			Model model) {
 		if (null == bridge) {
@@ -87,6 +88,9 @@ public class HueController {
 			}
 			if (null != loop) {
 				lightService.setLoopLights(bridge, lightsForm);
+			}
+			if (null != sounders) {
+				lightService.setSoundersLights(bridge, lightsForm);
 			}
 		} catch (HueServiceException e) {
 			model.addAttribute("errorDetail", e.getMessage());

@@ -90,4 +90,15 @@ public class LightService {
 		return ids;
 	}
 
+	public void setSoundersLights(BridgeProperties bridge, LightsForm lightsForm) {
+		List<String> ids = getSelectedLights(lightsForm);
+		SoundersRunnable myRunnable = new SoundersRunnable();
+		myRunnable.setIds(ids);
+		myRunnable.setBridge(bridge);
+		myRunnable.setLightRepository(lightRepository);
+		String name = "sounders " + ids.toString();
+		Thread thread = new Thread(myRunnable, name);
+		thread.start();		
+	}
+
 }
