@@ -1,6 +1,8 @@
 package com.electromagneticsoftware.services;
 
+import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -27,13 +29,18 @@ public class BridgeService {
 		this.properties = properties;
 	}
 
-
-	public BridgeProperties find() {
+	public BridgeProperties find() throws HueServiceException {
 		BridgeProperties bridge = null;
 		String ip = properties.getBridgeIp();
+		if (StringUtils.isBlank(ip)) {
+			bridge = discoverBridge();
+			if (null != bridge) {
+				ip = bridge.getBridgeIp();
+			}
+		}
 		String username = properties.getUsername();
 		if (StringUtils.isNotBlank(ip) && StringUtils.isNotBlank(username)) {
-			bridge = login(ip, username);
+			bridge = login(ip, username, true);
 		}
 		if (null != bridge) {
 			bridge.setSettleTime(properties.getSettleTime());
@@ -43,25 +50,33 @@ public class BridgeService {
 	}
 	
 	public BridgeProperties discoverBridge() throws HueServiceException {
-		String ip = "192.168.1.23";
-		// TODO: use SSDP to find the bridge
-		BridgeProperties bridge = createUser(ip);
-		if (null != bridge) {
-			String username = bridge.getUsername();
-			properties.setBridgeIp(ip);
-			properties.setUsername(username);
-			if (null == properties.getSettleTime()) {
-				properties.setSettleTime(500L);
+//		String ip = "192.168.1.23";
+//		BridgeProperties bridge = createUser(ip);
+		Set<String> ipAddresses = null;
+		try {
+			ipAddresses = SsdpClient.discover(5000);
+		} catch (IOException e) {
+			e.printStackTrace();
+			String error = "Unable to discover bridge: " + e.getLocalizedMessage();
+			LOGGER.error(error);
+			throw new HueServiceException(error);
+		}
+		BridgeProperties bridge = null;
+		for (String ip : ipAddresses) {
+			String username = properties.getUsername();
+			if (StringUtils.isNotBlank(ip) && StringUtils.isNotBlank(username)) {
+				bridge = login(ip, username, false);
+				if (null != bridge) {
+					saveBridgeProperties(ip, username);
+					break;
+				}
 			}
-			if (null == properties.getSleepTime()) {
-				properties.setSleepTime(4500L);
-			}
-			properties.save();
 		}
 		return bridge;
 	}
 	
-	private BridgeProperties createUser(String ip) throws HueServiceException {
+	public BridgeProperties createUser() throws HueServiceException {
+		String ip = properties.getBridgeIp();
 		BridgeProperties bridge = null;
 		ApplicationLogin login = new ApplicationLogin();
 		String url = "http://" + ip + "/api";
@@ -75,7 +90,9 @@ public class BridgeService {
 				Map<String, String> usermap = (Map<String, String>) response.get("success");
 				bridge = new BridgeProperties();
 				bridge.setBridgeIp(ip);
-				bridge.setUsername(usermap.get("username"));
+				String username = usermap.get("username");
+				bridge.setUsername(username);
+				saveBridgeProperties(ip, username);
 			}
 			if (response.containsKey("error")) {
 				LOGGER.info("Got error from bridge request.");
@@ -94,15 +111,40 @@ public class BridgeService {
 		return bridge;
 	}
 	
-	private BridgeProperties login(String ip, String username) {
+	private void saveBridgeProperties(String ip, String username) throws HueServiceException {
+		properties.setBridgeIp(ip);
+		properties.setUsername(username);
+		if (null == properties.getSettleTime()) {
+			properties.setSettleTime(500L);
+		}
+		if (null == properties.getSleepTime()) {
+			properties.setSleepTime(4500L);
+		}
+		properties.save();
+	}
+
+	private BridgeProperties login(String ip, String username, boolean retry) throws HueServiceException {
 		BridgeProperties bridge = new BridgeProperties();
 		bridge.setBridgeIp(ip);
 		bridge.setUsername(username);
 				
 		String url = "http://" + bridge.getBridgeIp() + "/api/" + username + "/config";
-		Config response  = restTemplate.getForObject(url, Config.class);
+		Config response = null;
+		try {
+			response  = restTemplate.getForObject(url, Config.class);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+			if (retry) {
+				// discover bridge
+				bridge = discoverBridge();
+				return bridge;
+			}
+			
+		}
 		// non-whitelisted users returns a subset of the config
-		if (null == response.getIpaddress()) {
+		if (null == response || null == response.getIpaddress()) {
 			bridge = null;
 		}
 		return bridge;

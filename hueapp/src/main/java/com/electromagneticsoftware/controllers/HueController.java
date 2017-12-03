@@ -2,7 +2,6 @@ package com.electromagneticsoftware.controllers;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +28,15 @@ public class HueController {
 	@RequestMapping(value = "/", method=RequestMethod.GET)
 	public String list(Model model) {
 		if (null == bridge) {
-			bridge = bridgeService.find();
+			try {
+				bridge = bridgeService.find();
+			} catch (HueServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "createUser";
+			}
 			if (null == bridge) {
-				return "discoverBridge";
+				return "createUser";
 			}
 		}	
 		showBridgeAndLights(model, bridge);
@@ -52,11 +57,11 @@ public class HueController {
 	public String createUser(Model model) {
 		BridgeProperties bridge;
 		try {
-			bridge = bridgeService.discoverBridge();
+			bridge = bridgeService.createUser();
 		} catch (HueServiceException e) {
 			model.addAttribute("errorMessage", "Error authorizing application");
 			model.addAttribute("errorDetail", e.getMessage());
-			return "discoverBridge";
+			return "createUser";
 		}
 		showBridgeAndLights(model, bridge);
 		return "redirect:/";
@@ -71,9 +76,15 @@ public class HueController {
 			LightsForm lightsForm, 
 			Model model) {
 		if (null == bridge) {
-			bridge = bridgeService.find();
+			try {
+				bridge = bridgeService.find();
+			} catch (HueServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return "createUser";
+			}
 			if (null == bridge) {
-				return "discoverBridge";
+				return "createUser";
 			}
 		}	
 		try {
