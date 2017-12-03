@@ -16,18 +16,19 @@
 		<![endif]-->
 	<header th:replace="fragments/header :: header"></header>
 	<div class="container-fluid">
-     	<div class="row">
-     		<div class="col">
+		<div class="row">
+			<div class="col">
 				<h1 id="top" th:text="#{title.authorize}">Authorize App</h1>
 				<p>Unable to access the Hue Bridge</p>
 				<p>Press link button on the Hue Bridge
 					<img src="/images/hue-link-button.png" alt="Link Button" /> 
-					and then <a class="btn btn-default" href="#" th:href="@{/createUser}">click here to create a new user</a></p>
+					and then <a class="btn btn-default" href="#" th:href="@{/createUser}">click here to connect</a></p>
 				<p th:if="${errorMessage}" th:text="${errorMessage}" />
 				<p th:if="${errorMessage}">Hue Bridge returned: <span class="text-errormsg" th:if="${errorDetail}" th:text="${errorDetail}" /></p>
 			</div>
 		</div>
 	</div>
+	<br/>
 	<footer th:replace="fragments/footer :: footer">&copy; 2017 Electromagnetic Software, LLC</footer>
 	<th:block th:replace="fragments/js :: js"></th:block>
 </body>
