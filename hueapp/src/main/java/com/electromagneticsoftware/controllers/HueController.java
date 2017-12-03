@@ -59,7 +59,7 @@ public class HueController {
 		try {
 			bridge = bridgeService.createUser();
 		} catch (HueServiceException e) {
-			model.addAttribute("errorMessage", "Error authorizing application");
+			model.addAttribute("errorMessage", "Unable to authorize this application");
 			model.addAttribute("errorDetail", e.getMessage());
 			return "createUser";
 		}
