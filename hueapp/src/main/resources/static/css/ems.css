@@ -49,3 +49,81 @@ footer {
 	margin-right: auto;
 	border: 1px solid #aaa;
 }
+.text-errormsg {
+	color: darkred;
+}
+/* ----- button styles ----- */
+.btn-on       { background-color: #ffd65e; }	/* goldenrod */
+.btn-on:hover { background-color: #f3ed53; }
+.btn-off      { background-color: #d3d3d3; }	/* dark gray */
+.btn-off:hover { background-color: #575757; }
+/* Xmas button from: https://cssgradientbutton.com/?bg0=43FC00&bg1=FF0000&bg2=35c900&bg3=cc0000&r=3&p_top=10&p_right=10&p_bottom=10&p_left=10&w_auto=yes&w=150&text_c=FFFFFF&textshadow=no&textshadow_c=000000&shadow_bt=3&shadow_c=B4B5B5&border_s=1&border_c=34C400&border_c_hover=289600&f_size_auto=no&f_s=12&font=arial, helvetica, sans-serif&bold=no&inset=no&s_x=0&s_y=0&s_b=0&t_s_px=2&b_top=1&b_right=1&b_bottom=1&b_left=1&bt_c=34C400&br_c=34C400&bb_c=34C400&bl_c=34C400&bhover_top=1&bhover_right=1&bhover_bottom=1&bhover_left=1&bhover_t_c=289600&bhover_r_c=289600&bhover_b_c=289600&bhover_l_c=289600&bh_top=1&br_top=3&br_right=3&br_bottom=3&br_left=3&h_s=-1&v_s=-1&b_s=0&o_s=0.3 */
+.btn-xmas {
+	border: 1px solid #34C400;
+	-webkit-box-shadow: #B4B5B5 3px 3px 3px;
+	-moz-box-shadow: #B4B5B5 3px 3px 3px;
+	box-shadow: #B4B5B5 3px 3px 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 12px;
+	font-family: arial, helvetica, sans-serif;
+	padding: 10px 10px 10px 10px;
+	text-decoration: none;
+	display: inline-block;
+	color: #FFFFFF;
+	background-color: #43FC00;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#43FC00), to(#FF0000));
+	background-image: -webkit-linear-gradient(top, #43FC00, #FF0000);
+	background-image: -moz-linear-gradient(top, #43FC00, #FF0000);
+	background-image: -ms-linear-gradient(top, #43FC00, #FF0000);
+	background-image: -o-linear-gradient(top, #43FC00, #FF0000);
+	background-image: linear-gradient(to bottom, #43FC00, #FF0000);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#43FC00, endColorstr=#FF0000);
+}
+.btn-xmas:hover {
+	border: 1px solid #289600;
+	background-color: #35c900;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#35c900), to(#cc0000));
+	background-image: -webkit-linear-gradient(top, #35c900, #cc0000);
+	background-image: -moz-linear-gradient(top, #35c900, #cc0000);
+	background-image: -ms-linear-gradient(top, #35c900, #cc0000);
+	background-image: -o-linear-gradient(top, #35c900, #cc0000);
+	background-image: linear-gradient(to bottom, #35c900, #cc0000);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#35c900, endColorstr=#cc0000);
+}
+/* Sounders button from: https://cssgradientbutton.com/?bg0=43FC00&bg1=095EB3&bg2=35c900&bg3=074482&r=3&p_top=10&p_right=10&p_bottom=10&p_left=10&w_auto=yes&w=150&text_c=FFFFFF&textshadow=no&textshadow_c=000000&shadow_bt=3&shadow_c=B4B5B5&border_s=1&border_c=34c400&border_c_hover=289600&f_size_auto=no&f_s=12&font=arial, helvetica, sans-serif&bold=no&inset=no&s_x=0&s_y=0&s_b=0&t_s_px=2&b_top=1&b_right=1&b_bottom=1&b_left=1&bt_c=34c400&br_c=34c400&bb_c=34c400&bl_c=34c400&bhover_top=1&bhover_right=1&bhover_bottom=1&bhover_left=1&bhover_t_c=289600&bhover_r_c=289600&bhover_b_c=289600&bhover_l_c=289600&bh_top=1&br_top=3&br_right=3&br_bottom=3&br_left=3&h_s=-1&v_s=-1&b_s=0&o_s=0.3 */
+.btn-sounders {
+	border:1px solid #34c400;
+	-webkit-box-shadow: #B4B5B5 3px 3px 3px;
+	-moz-box-shadow: #B4B5B5 3px 3px 3px;
+	box-shadow: #B4B5B5 3px 3px 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 12px;
+	font-family: arial, helvetica, sans-serif;
+	padding: 10px 10px 10px 10px;
+	text-decoration: none;
+	display: inline-block;
+	color: #FFFFFF;
+	background-color: #43FC00;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#43FC00), to(#095EB3));
+	background-image: -webkit-linear-gradient(top, #43FC00, #095EB3);
+	background-image: -moz-linear-gradient(top, #43FC00, #095EB3);
+	background-image: -ms-linear-gradient(top, #43FC00, #095EB3);
+	background-image: -o-linear-gradient(top, #43FC00, #095EB3);
+	background-image: linear-gradient(to bottom, #43FC00, #095EB3);
+	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#43FC00, endColorstr=#095EB3);
+}
+.btn-sounders:hover {
+	border: 1px solid #289600;
+	background-color: #35c900;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#35c900), to(#074482));
+	background-image: -webkit-linear-gradient(top, #35c900, #074482);
+	background-image: -moz-linear-gradient(top, #35c900, #074482);
+	background-image: -ms-linear-gradient(top, #35c900, #074482);
+	background-image: -o-linear-gradient(top, #35c900, #074482);
+	background-image: linear-gradient(to bottom, #35c900, #074482);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#35c900, endColorstr=#074482);
+}
