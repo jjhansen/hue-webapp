@@ -27,22 +27,16 @@ public class LightService {
 	
 	public List<Light> findAll(BridgeProperties bridge, List<Group> groups) {
 		List<Light> lights = lightRepository.findAll(bridge);
-		Map<String, List<String>> lightRooms = new HashMap<String, List<String>>();
+		Map<String, String> lightRooms = new HashMap<String, String>();
 		for (Group group : groups) {
 			String name = group.getName();
 			String[] groupLights = group.getLights();
 			for (String id : groupLights) {
-				List<String> rooms = lightRooms.get(id);
-				if (null == rooms) {
-					rooms = new ArrayList<String>();
-					lightRooms.put(id, rooms);
-				}
-				rooms.add(name);
+				lightRooms.put(id, name);
 			}
 		}
 		for (Light light : lights) {
-			List<String> rooms = lightRooms.get(light.getId());
-			light.setRooms(rooms);
+			light.setRoom(lightRooms.get(light.getId()));
 		}
 		return lights;
 	}
