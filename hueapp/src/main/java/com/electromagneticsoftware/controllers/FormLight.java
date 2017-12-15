@@ -37,7 +37,7 @@ public class FormLight implements Serializable, Comparable<FormLight>{
 
 	@Override
 	public int compareTo(FormLight arg0) {
-		return Integer.valueOf(id).compareTo(Integer.valueOf(arg0.id));
+		return light.compareTo(arg0.light);
 	}
 	
 	public Boolean getSelected() {

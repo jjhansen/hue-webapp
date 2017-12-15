@@ -46,7 +46,7 @@ public class Light implements Serializable, Comparable<Light> {
 	}
 	@Override
 	public int compareTo(Light o) {		
-		return Integer.valueOf(id).compareTo(Integer.valueOf(o.id));
+		return name.compareTo(o.name);
 	}
 	@Override
 	public int hashCode() {

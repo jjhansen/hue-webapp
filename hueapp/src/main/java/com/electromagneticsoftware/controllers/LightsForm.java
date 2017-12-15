@@ -22,6 +22,7 @@ public class LightsForm implements Serializable {
 			f.setId(light.getId());
 			lights.add(f);
 		}
+		lights.sort(null);
 	}
 
 	public List<FormLight> getLights() {
