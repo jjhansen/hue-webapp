@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.electromagneticsoftware.business.entities.Group;
 import com.electromagneticsoftware.business.entities.Light;
 import com.electromagneticsoftware.services.BridgeProperties;
 import com.electromagneticsoftware.services.BridgeService;
+import com.electromagneticsoftware.services.GroupService;
 import com.electromagneticsoftware.services.HueServiceException;
 import com.electromagneticsoftware.services.LightService;
 
@@ -22,8 +24,11 @@ public class HueController {
 	private LightService lightService;
 	@Autowired
 	private BridgeService bridgeService;
-
+	@Autowired
+	private GroupService groupService;
+	
 	private BridgeProperties bridge;
+	private List<Group> groups;
 	
 	@RequestMapping(value = "/", method=RequestMethod.GET)
 	public String list(Model model) {
@@ -38,14 +43,17 @@ public class HueController {
 			if (null == bridge) {
 				return "createUser";
 			}
-		}	
+		}
+		if (null == groups) {
+			groups = groupService.findAll(bridge);
+		}
 		showBridgeAndLights(model, bridge);
 		return "index";
 	}	
 		
 	private void showBridgeAndLights(Model model, BridgeProperties bridge) {
 		model.addAttribute("bridge", bridge);
-		List<Light> lights = lightService.findAll(bridge);
+		List<Light> lights = lightService.findAll(bridge, groups);
 		lights.sort((m1, m2) -> {
 			return (Integer.valueOf(m1.getId()).compareTo(Integer.valueOf(m2.getId())));
 		});

@@ -1,13 +1,16 @@
 package com.electromagneticsoftware.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.electromagneticsoftware.business.entities.Group;
 import com.electromagneticsoftware.business.entities.Light;
 import com.electromagneticsoftware.business.entities.LightStateUpdate;
 import com.electromagneticsoftware.business.entities.repositories.LightRepository;
@@ -22,8 +25,26 @@ public class LightService {
 	@Autowired
 	private LightRepository lightRepository;
 	
-	public List<Light> findAll(BridgeProperties bridge) {
-		return lightRepository.findAll(bridge);
+	public List<Light> findAll(BridgeProperties bridge, List<Group> groups) {
+		List<Light> lights = lightRepository.findAll(bridge);
+		Map<String, List<String>> lightRooms = new HashMap<String, List<String>>();
+		for (Group group : groups) {
+			String name = group.getName();
+			String[] groupLights = group.getLights();
+			for (String id : groupLights) {
+				List<String> rooms = lightRooms.get(id);
+				if (null == rooms) {
+					rooms = new ArrayList<String>();
+					lightRooms.put(id, rooms);
+				}
+				rooms.add(name);
+			}
+		}
+		for (Light light : lights) {
+			List<String> rooms = lightRooms.get(light.getId());
+			light.setRooms(rooms);
+		}
+		return lights;
 	}
 
 	public void setXmasLights(BridgeProperties bridge, LightsForm lightsForm) throws HueServiceException {

@@ -1,6 +1,7 @@
 package com.electromagneticsoftware.business.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -13,6 +14,8 @@ public class Light implements Serializable, Comparable<Light> {
 	private String type;
 	private String name;
 	private String modelid;
+	private List<String> rooms;
+	
 
 	public String getId() {
 		return id;
@@ -43,6 +46,12 @@ public class Light implements Serializable, Comparable<Light> {
 	}
 	public void setModelid(String modelid) {
 		this.modelid = modelid;
+	}
+	public List<String> getRooms() {
+		return rooms;
+	}
+	public void setRooms(List<String> rooms) {
+		this.rooms = rooms;
 	}
 	@Override
 	public int compareTo(Light o) {		
