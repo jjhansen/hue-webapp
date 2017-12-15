@@ -32,6 +32,7 @@
 							<tr>
 								<th th:utext="#{lightlist.select}">Select</th>
 								<th th:text="#{lightlist.on}">Pwr</th>
+								<th th:text="#{lightlist.rooms}">Room</th>
 								<th th:text="#{lightlist.name}">Light</th>
 								<th th:text="#{lightlist.id}">Id</th>
 								<th th:text="#{lightlist.reachable}">Reachable</th>
@@ -40,7 +41,6 @@
 								<th th:text="#{lightlist.sat}">Sat</th>
 								<th th:text="#{lightlist.bri}">Lvl</th>
 								<th th:text="#{lightlist.sample}">Color</th>
-								<th th:text="#{lightlist.rooms}">Rooms</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -50,19 +50,19 @@
 									<input th:type="hidden" th:field="*{lights[__${iter.index}__].id}"/>
 								</td>
 								<td class="text-center" th:utext="*{lights[__${iter.index}__].light.state.on} ? #{on.true} : #{on.false}">on <img src="../static/images/icon-lightbulb-on-12.gif" alt="On"/></td>
+								<td class="text-left">
+									<th:block th:each="room : *{lights[__${iter.index}__].light.rooms}">
+										<span th:text="${room}"></span>
+									</th:block> 
+								</td>
 								<td class="text-left" th:text="*{lights[__${iter.index}__].light.name}">name</td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].id}">1</td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.reachable} ? #{reachable.true} : #{reachable.false}">false <img src="../static/images/icon-exclamation-12.gif" alt="Unreachable"/></td>
 								<td class="text-left" th:utext="*{lights[__${iter.index}__].light.state.effect=='colorloop'} ? #{effect.loop} : #{effect.none}">Loop <img src="../static/images/icon-color-wheel-12.gif" alt="Color loop"/></td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.hue}">unk</td>
 								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.sat}">unk</td>
-								<td class="text-right" th:text="*{lights[__${iter.index}__].light.state.bri}">unk</td>
-								<td class="text-center"><div class="colortile" th:style="'background-color: ' + *{lights[__${iter.index}__].light.state.hSLcode} + ';'"></div></td>
-								<td class="text-left">
-									<th:block th:each="room : *{lights[__${iter.index}__].light.rooms}">
-										<p><span th:text="${room}"></span></p>
-									</th:block> 
-								</td>
+								<td class="level" th:text="*{lights[__${iter.index}__].light.state.bri}">unk</td>
+								<td class="color"><div class="colortile" th:style="'background-color: ' + *{lights[__${iter.index}__].light.state.hSLcode} + ';'"></div></td>
 							</tr>
 						</tbody>
 					</table>
