@@ -42,9 +42,18 @@ footer {
 .btn {
 	border: 1px solid #888;
 }
-td.color {
-	
-}
+th.select,td.select{ text-align: center; }
+th.state, td.state { text-align: center; }
+th.room,  td.room  { text-align: right; }
+          td.room::after { content: " - "} 
+th.name,  td.name  { text-align: left; }
+th.nbr,   td.nbr   { text-align: right; }
+th.reach, td.reach { text-align: left; }
+th.loop,  td.loop  { text-align: left; }
+th.hue,   td.hue   { text-align: right; display: none; }
+th.sat,   td.sat   { text-align: right; display: none; }
+th.level, td.level { text-align: right; }
+th.color, td.color { }
 .colortile {
 	width: 2em;
 	height: 1em;
