@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import com.electromagneticsoftware.business.entities.Light;
@@ -39,7 +40,23 @@ public class LightRepository {
 
 	public Light findLight(Long id, BridgeProperties bridge) {
 		String url = "http://" + bridge.getBridgeIp() + "/api/" + bridge.getUsername() + "/lights/" + id;
-		Light l = restTemplate.getForObject(url , Light.class);
+		Light l = null;
+		int retry = 0;
+		while (retry < 5) {
+			try {
+				l = restTemplate.getForObject(url , Light.class);
+			}
+			catch (ResourceAccessException ex) {
+				LOGGER.info("ResourceAccessException received. Retrying. Retry count = " + retry);
+				++retry;
+				if (retry >= 5) {
+					throw ex;
+				}
+			}
+			if (null != l) {
+				return l;
+			}
+		}
 		return l;
 	}
 	

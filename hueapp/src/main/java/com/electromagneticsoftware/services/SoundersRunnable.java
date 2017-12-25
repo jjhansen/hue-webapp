@@ -1,84 +1,39 @@
 package com.electromagneticsoftware.services;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.electromagneticsoftware.business.entities.Light;
-import com.electromagneticsoftware.business.entities.LightState;
 import com.electromagneticsoftware.business.entities.LightStateUpdate;
-import com.electromagneticsoftware.business.entities.repositories.LightRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public class SoundersRunnable implements Runnable {
+public class SoundersRunnable extends RunnableBase {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(LightService.class);
-	private List<String> ids;
-	private LightRepository lightRepository;
-	private BridgeProperties bridge;
-	private LightState lastState;
-	private Integer numChanges = 0;
+	private static final Logger LOGGER = LoggerFactory.getLogger(SoundersRunnable.class);
+	private static final String THREAD_NAME = "sounders";
 
 	@Override
-	public void run() {
-		LOGGER.info("Starting sounders thread");
-		Long settleTime = bridge.getSettleTime();
-		Long sleepTime = bridge.getSleepTime();
+	protected Boolean updateLights() {
 		Boolean keepGoing = true;
-		if (ids.isEmpty()) {
-			keepGoing = false;
+		LightStateUpdate update = new LightStateUpdate();
+		if (numChanges % 2 == 0) {
+			setGreen(update);
 		}
 		else {
-			Light light = lightRepository.findLight(Long.valueOf(ids.get(0)), bridge);
-			lastState = light.getState();
+			setBlue(update);
 		}
-		while(keepGoing) {
-			++numChanges;
-			keepGoing = checkForChanges();
-			if (keepGoing) {
-				LightStateUpdate update = new LightStateUpdate();
-				if (numChanges % 2 == 0) {
-					setGreen(update);
-				}
-				else {
-					setBlue(update);
-				}
-				try {
-					lightRepository.setState(bridge, ids, update);
-				} catch (JsonProcessingException e) {
-					LOGGER.error(e.getLocalizedMessage());
-					e.printStackTrace();
-					keepGoing = false;
-				}
-				try {
-					Thread.sleep(settleTime);
-				} catch (InterruptedException e) {
-					LOGGER.info("sounders thread interrupted: " + e.getLocalizedMessage());
-					keepGoing = false;
-				}
-				Light light = lightRepository.findLight(Long.valueOf(ids.get(0)), bridge);
-				lastState = light.getState();
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					LOGGER.info("sounders thread interrupted: " + e.getLocalizedMessage());
-					keepGoing = false;
-				}
-			}
-		}	
-		LOGGER.info("Exiting sounders thread");
+		try {
+			lightRepository.setState(bridge, ids, update);
+		} catch (JsonProcessingException e) {
+			LOGGER.error(e.getLocalizedMessage());
+			e.printStackTrace();
+			keepGoing = false;
+		}
+		return keepGoing;
 	}
 
-	private Boolean checkForChanges() {
-		Light light = lightRepository.findLight(Long.valueOf(ids.get(0)), bridge);
-		LightState currentState = light.getState();
-		boolean result = currentState.hueSatEquals(lastState);
-		if (!result) {
-			LOGGER.info("current:  " + currentState.toString());
-			LOGGER.info("previous: " + lastState.toString());
-		}
-		return result;
+	@Override
+	protected String getThreadName() {
+		return THREAD_NAME;
 	}
 
 	private void setBlue(LightStateUpdate update) {
@@ -95,30 +50,6 @@ public class SoundersRunnable implements Runnable {
 		update.setSat(254L);	// max is 254
 //		update.setBri(254L);	// max is 254
 		update.setEffect("none");
-	}
-
-	public List<String> getIds() {
-		return ids;
-	}
-
-	public void setIds(List<String> ids) {
-		this.ids = ids;
-	}
-
-	public LightRepository getLightRepository() {
-		return lightRepository;
-	}
-
-	public void setLightRepository(LightRepository lightRepository) {
-		this.lightRepository = lightRepository;
-	}
-
-	public BridgeProperties getBridge() {
-		return bridge;
-	}
-
-	public void setBridge(BridgeProperties bridge) {
-		this.bridge = bridge;
 	}
 
 }

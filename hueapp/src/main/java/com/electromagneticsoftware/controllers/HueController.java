@@ -77,6 +77,7 @@ public class HueController {
 
 	@RequestMapping(value = "/manageLights", method=RequestMethod.POST)
 	public String manageLights(@RequestParam(value = "xmas", required = false) String xmas,
+			@RequestParam(value = "xmas2", required = false) String xmas2,
 			@RequestParam(value = "on", required = false) String on,
 			@RequestParam(value = "off", required = false) String off,
 			@RequestParam(value = "loop", required = false) String loop,
@@ -98,6 +99,9 @@ public class HueController {
 		try {
 			if (null != xmas) {
 				lightService.setXmasLights(bridge, lightsForm);
+			}
+			if (null != xmas2) {
+				lightService.setXmas2Lights(bridge, lightsForm);
 			}
 			if (null != on) {
 				lightService.turnOnLights(bridge, lightsForm);

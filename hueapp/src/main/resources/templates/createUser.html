@@ -24,7 +24,7 @@
 					<img src="/images/hue-link-button.png" alt="Link Button" /> 
 					and then <a class="btn btn-default" href="#" th:href="@{/createUser}">click here to connect</a></p>
 				<p th:if="${errorMessage}" th:text="${errorMessage}" />
-				<p th:if="${errorMessage}">Hue Bridge returned: <span class="text-errormsg" th:if="${errorDetail}" th:text="${errorDetail}" /></p>
+				<p th:if="${errorMessage}">Hue Bridge returned: <span class="text-errormsg" th:if="${errorDetail}" th:text="${errorDetail}"></span></p>
 			</div>
 		</div>
 	</div>

@@ -43,11 +43,27 @@ public class LightService {
 
 	public void setXmasLights(BridgeProperties bridge, LightsForm lightsForm) throws HueServiceException {
 		List<String> ids = getSelectedLights(lightsForm);
-		XmasRunnable myRunnable = new XmasRunnable();
+		RunnableBase myRunnable = new XmasRunnable();
+		startThread(myRunnable, ids, bridge);
+	}
+
+	public void setXmas2Lights(BridgeProperties bridge, LightsForm lightsForm) {
+		List<String> ids = getSelectedLights(lightsForm);
+		RunnableBase myRunnable = new Xmas2Runnable();
+		startThread(myRunnable, ids, bridge);
+	}
+
+	public void setSoundersLights(BridgeProperties bridge, LightsForm lightsForm) {
+		List<String> ids = getSelectedLights(lightsForm);
+		RunnableBase myRunnable = new SoundersRunnable();
+		startThread(myRunnable, ids, bridge);
+	}
+
+	private void startThread(RunnableBase myRunnable, List<String> ids, BridgeProperties bridge) {
 		myRunnable.setIds(ids);
 		myRunnable.setBridge(bridge);
 		myRunnable.setLightRepository(lightRepository);
-		String name = "xmas " + ids.toString();
+		String name = myRunnable.getThreadName() + " " + ids.toString();
 		Thread thread = new Thread(myRunnable, name);
 		thread.start();		
 	}
@@ -105,15 +121,5 @@ public class LightService {
 		return ids;
 	}
 
-	public void setSoundersLights(BridgeProperties bridge, LightsForm lightsForm) {
-		List<String> ids = getSelectedLights(lightsForm);
-		SoundersRunnable myRunnable = new SoundersRunnable();
-		myRunnable.setIds(ids);
-		myRunnable.setBridge(bridge);
-		myRunnable.setLightRepository(lightRepository);
-		String name = "sounders " + ids.toString();
-		Thread thread = new Thread(myRunnable, name);
-		thread.start();		
-	}
 
 }
